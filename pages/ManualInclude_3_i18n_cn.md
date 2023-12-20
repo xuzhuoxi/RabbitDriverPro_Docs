@@ -62,13 +62,13 @@
 #### 3.4.1 使用 I18NTMPText 组件，为TMP_Text增加国际化支持。
 为TMP_Text节点增加 I18NTMPText 组件   
 ![image](assets/img/i18n_3.png)  
-+ File Key 为注册文件集时的fileKey参数。
++ Package Name 为注册文件集时的 'i18NPackage' 参数。
 + Auto Refresh 选中时，管理器重新加载数据后会自刷新。
   
 #### 3.4.2 使用 I18NText 组件，为Text增加国际化支持。
 为Text节点增加 I18NText 组件   
 ![image](assets/img/i18n_2.png)  
-+ File Key 为注册文件集时的fileKey参数。
++ Package Name 为注册文件集时的 'i18NPackage' 参数。
 + Auto Refresh 选中时，管理器重新加载数据后会自刷新。
 
 #### 3.4.3 在代码中读取国际化数据。

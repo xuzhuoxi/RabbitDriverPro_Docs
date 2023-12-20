@@ -62,13 +62,13 @@ Call the LoadDataFromSettings function in the II18NManager instance:
 #### 3.4.1 Use the I18NTMPText component to add internationalization support to TMP_Text.
 Add I18NTMPText component to TMP_Text node  
 ![image](assets/img/i18n_3.png)  
-+ File Key is the fileKey parameter when registering a file set.
++ Package Name is the 'i18NPackage' parameter when registering a file set.
 + Auto Refresh When checked, the manager will refresh itself after reloading the data.
   
 #### 3.4.2 Use the I18NText component to add internationalization support to Text.
 Add I18NText component to Text node  
 ![image](assets/img/i18n_2.png)  
-+ File Key is the fileKey parameter when registering a file set.
++ Package Name is the 'i18NPackage' parameter when registering a file set.
 + Auto Refresh When checked, the manager will refresh itself after reloading the data.
 
 #### 3.4.3 Reading internationalized data in code.
