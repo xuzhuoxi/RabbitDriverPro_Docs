@@ -29,7 +29,7 @@
 + default=true 时设置当前语言为默认语言。
   
 #### 3.2.2 向注册表注册文件集加载信息
-调用 I18NRegister 实例中的 RegisterFile 函数：  
+调用 I18NRegister 实例中的 RegisterFileInfo 或 RegisterFileLoadingInfo 函数：  
 ![image](assets/img/i18n_7.png)  
 + fileKey 用于标识当前设置的文件集。
 + default=truej时设置当前文件集为默认文件集。
@@ -72,12 +72,12 @@
 + Auto Refresh 选中时，管理器重新加载数据后会自刷新。
 
 #### 3.4.3 在代码中读取国际化数据。
-`I18NManagerShared.Manager.GetValue(id, fileKey, lang);`  
+`I18NManagerShared.Manager.GetValue(id, i18NPackage, langName);`  
 ![image](assets/img/i18n_10.png)  
 
 #### 3.4.4 在代码中把文本内容进行国际化。
 在文件内容中支持脚本格式： `{{id}}`  
-`I18NManagerShared.Manager.GetContent(content, fileKey, lang);`  
+`I18NManagerShared.Manager.GetContent(content, i18NPackage, langName);`  
 ![image](assets/img/i18n_12.png)  
 
 ### 3.5 示例

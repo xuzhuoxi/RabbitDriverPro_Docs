@@ -33,9 +33,9 @@ iOS, Android, WebGL, tvOS, Steam
 Please **backup** your project when upgrading, delete the existing RocketDriver folder and re-import.  
 
 If the API is lost after the update and an error is reported, you can view:  
-+ [Changelog](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-CHANGELOG_en.html)
-+ [User Manual](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-Manual_en.html)
-+ [FAQs](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-FAQs_en.html)
++ [Changelog](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_CHANGELOG_en.html)
++ [User Manual](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_Manual_en.html)
++ [FAQs](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_FAQs_en.html)
 + [Issues](https://github.com/xuzhuoxi/RocketDriver-Docs/issues)
 
 or:  
@@ -45,11 +45,11 @@ or:
 ### 5. Support
 + [Get Package](https://assetstore.unity.com/packages/slug/234202)
 + [RocketDriver Pro Support Homepage](https://www.xuzhuoxi.com/RocketDriver-Docs/)
-+ [RocketDriver Pro Read Manual](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-README_en.html)
-+ [RocketDriver Pro User Manual](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-Manual_en.html)
-+ [RocketDriver Pro Changelog](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-CHANGELOG_en.html)
-+ [RocketDriver Pro FAQ](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-FAQs_en.html)
-+ [RocketDriver Pro Third Party Notices](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-ThirdPartyNotices_en.html)
++ [RocketDriver Pro Read Manual](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_README_en.html)
++ [RocketDriver Pro User Manual](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_Manual_en.html)
++ [RocketDriver Pro Changelog](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_CHANGELOG_en.html)
++ [RocketDriver Pro FAQ](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_FAQs_en.html)
++ [RocketDriver Pro Third Party Notices](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_ThirdPartyNotices_en.html)
 + [Github-Issues](https://github.com/xuzhuoxi/RocketDriver-Docs/issues)
 + [Submit an issue](https://github.com/xuzhuoxi/RocketDriver-Docs/issues/new)
 + [Author's Homepage](https://www.xuzhuoxi.com/)

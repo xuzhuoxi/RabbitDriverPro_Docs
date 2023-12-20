@@ -33,9 +33,9 @@ iOS、Android、WebGL、tvOS、Steam
 升级时请先**备份**你的项目，删除现有的 RocketDriver 文件夹后重新导入。  
 
 如果更新后出API丢失报错情况，可查看：  
-+ [更新日志](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-CHANGELOG_cn.html)
-+ [用户手册](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-Manual_cn.html)
-+ [常见问题](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-FAQs_cn.html)
++ [更新日志](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_CHANGELOG_cn.html)
++ [用户手册](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_Manual_cn.html)
++ [常见问题](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_FAQs_cn.html)
 + [Issues](https://github.com/xuzhuoxi/RocketDriver-Docs/issues)
 
 或者：
@@ -45,11 +45,11 @@ iOS、Android、WebGL、tvOS、Steam
 ###  5. 支持 
 + [下载](https://assetstore.unity.com/packages/slug/234202) 
 + [RocketDriver Pro 支持主页](https://www.xuzhuoxi.com/RocketDriver-Docs/) 
-+ [RocketDriver Pro 阅读手册](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-README_cn.html) 
-+ [RocketDriver Pro 用户手册](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-Manual_cn.html) 
-+ [RocketDriver Pro 更新日志](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-CHANGELOG_cn.html) 
-+ [RocketDriver Pro 常见问题](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-FAQs_cn.html) 
-+ [RocketDriver Pro 第三方说明](https://www.xuzhuoxi.com/RocketDriver-Docs/home/Home-ThirdPartyNotices_cn.html) 
++ [RocketDriver Pro 阅读手册](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_README_cn.html) 
++ [RocketDriver Pro 用户手册](https://www.xuzhuoxi.com/RocketDriver-Docspages/Home_Manual_cn.html) 
++ [RocketDriver Pro 更新日志](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_CHANGELOG_cn.html) 
++ [RocketDriver Pro 常见问题](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_FAQs_cn.html) 
++ [RocketDriver Pro 第三方说明](https://www.xuzhuoxi.com/RocketDriver-Docs/pages/Home_ThirdPartyNotices_cn.html) 
 + [Github-Issues](https://github.com/xuzhuoxi/RocketDriver-Docs/issues) 
 + [提交问题](https://github.com/xuzhuoxi/RocketDriver-Docs/issues/new) 
 + [作者主页](https://www.xuzhuoxi.com/) 

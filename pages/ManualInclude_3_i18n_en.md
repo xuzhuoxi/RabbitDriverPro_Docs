@@ -28,8 +28,8 @@ Call the RegisterLang function in the I18NRegister instance:
 + langName as langSuffix suggests.
 + default=true sets the current language as the default language.
   
-#### 3.2.1 Loading information to the registry registration file set
-Call the RegisterFile function in the I18NRegister instance:  
+#### 3.2.2 Loading information to the registry registration file set
+Call the RegisterFileInfo or RegisterFileLoadingInfo function in the I18NRegister instance:  
 ![image](assets/img/i18n_7.png)  
 + fileKey is used to identify the currently set fileset.
 + default=truej Set the current fileset as the default fileset.
@@ -72,12 +72,12 @@ Add I18NText component to Text node
 + Auto Refresh When checked, the manager will refresh itself after reloading the data.
 
 #### 3.4.3 Reading internationalized data in code.
-`I18NManagerShared.Manager.GetValue(id, fileKey, lang);`
+`I18NManagerShared.Manager.GetValue(id, i18NPackage, langName);`
 ![image](assets/img/i18n_10.png)  
 
 #### 3.4.4 Internationalize the text content in the code.
 Support script format in the file content: `{{id}}`   
-`I18NManagerShared.Manager.GetContent(content, fileKey, lang);`  
+`I18NManagerShared.Manager.GetContent(content, i18NPackage, langName);`  
 ![image](assets/img/i18n_12.png)  
 
 ### 3.5 Example
