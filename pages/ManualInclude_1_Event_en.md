@@ -25,5 +25,5 @@ The sample treats `EventDispatcher` as `IThreadEventDispatcher`. After `SetThrea
 Extend `EventDispatcher` and implement a custom interface to customize event behavior.  
 
 ### 1.2 Example
-[Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs](../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs)  
+`Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs`  
 ![image](assets/img/event_1.png)  

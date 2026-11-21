@@ -67,9 +67,9 @@ RabbitDriver Pro 的代码分开放在插件目录和预编译 DLL 中。
 + LocalAccount  
   本地账号。  
 + NetManager  
-  连接实例登记，以及无真实网络时的虚拟服务端 / 客户端。入口是 [`NetManager.Shared`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/NetManager/NetManager.cs)。详细请看[4.网络管理扩展模块(NetManager)](Manual_4.Net_cn.html)。  
+  连接实例登记，以及无真实网络时的虚拟服务端 / 客户端。入口是 `NetManager.Shared`。详细请看[4.网络管理扩展模块(NetManager)](Manual_4.Net_cn.html)。  
 + PanelManager  
-  面板管理。入口是 [`PanelManagerShared.Manager`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/PanelManagerShared.cs)。详细请看[6.面板管理模块(PanelManager)](Manual_6.Panel_cn.html)。  
+  面板管理。入口是 `PanelManagerShared.Manager`。详细请看[6.面板管理模块(PanelManager)](Manual_6.Panel_cn.html)。  
 + RpgMaterial  
   游戏材料数据。详细请看[8.Rpg材料数据系统(RpgMaterial)](Manual_8.RpgMaterial_cn.html)。  
 + Service  
@@ -78,7 +78,7 @@ RabbitDriver Pro 的代码分开放在插件目录和预编译 DLL 中。
 + TipsManager  
 
 ### RabbitNetwork
-命名空间为 **JLGames.RabbitDriver.RabbitNetwork**。[`RabbitNetworkManager`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/RabbitNetwork/RabbitNetworkManager.cs) 是挂到场景上的联机组件。示例在 `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`。  
+命名空间为 **JLGames.RabbitDriver.RabbitNetwork**。`RabbitNetworkManager` 是挂到场景上的联机组件。示例在 `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`。  
 
 ### 插件目录
 `Assets/JLGames/RabbitDriverPro`  
@@ -86,7 +86,7 @@ RabbitDriver Pro 的代码分开放在插件目录和预编译 DLL 中。
 + Editor  
   菜单前缀是 `Tools/RabbitDriverPro/`。未注释的入口包括 Getting Started、Help、Project（含 `Gen LoaderSettings`、`Gen I18NSettings`、`Gen AudioSettings`）、Tools、Settings、Macros。  
 + Runtime  
-  薄扩展。[`I18NTMPText`](../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/Runtime/Extend/i18n/Component/I18NTMPText.cs) 位于 `Runtime/Extend/i18n/Component/`，仅在定义 `TMP_PRESENT` 时编译。  
+  薄扩展。`I18NTMPText` 位于 `Runtime/Extend/i18n/Component/`，仅在定义 `TMP_PRESENT` 时编译。  
 + Samples  
   各模块示例。手册各章末尾给出对应的 `Samples/<模块>` 路径。  
 

@@ -67,9 +67,9 @@ Namespace: **JLGames.RabbitDriver.Games**. Folder: `RabbitDriver-Core/JLGames/Ra
 + LocalAccount  
   Local accounts.  
 + NetManager  
-  Connection-instance registry, plus a virtual server and client for use without a real network. The entry point is [`NetManager.Shared`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/NetManager/NetManager.cs). See [4.Net Manager(NetManager)](Manual_4.Net_en.html).  
+  Connection-instance registry, plus a virtual server and client for use without a real network. The entry point is `NetManager.Shared`. See [4.Net Manager(NetManager)](Manual_4.Net_en.html).  
 + PanelManager  
-  Panel management. The entry point is [`PanelManagerShared.Manager`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/PanelManagerShared.cs). See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html).  
+  Panel management. The entry point is `PanelManagerShared.Manager`. See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html).  
 + RpgMaterial  
   Game material data. See [8.Rpg Material Data System(RpgMaterial)](Manual_8.RpgMaterial_en.html).  
 + Service  
@@ -78,7 +78,7 @@ Namespace: **JLGames.RabbitDriver.Games**. Folder: `RabbitDriver-Core/JLGames/Ra
 + TipsManager  
 
 ### RabbitNetwork
-Namespace: **JLGames.RabbitDriver.RabbitNetwork**. [`RabbitNetworkManager`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/RabbitNetwork/RabbitNetworkManager.cs) is the networking component placed in a scene. The sample is `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`.  
+Namespace: **JLGames.RabbitDriver.RabbitNetwork**. `RabbitNetworkManager` is the networking component placed in a scene. The sample is `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`.  
 
 ### Plugin folder
 `Assets/JLGames/RabbitDriverPro`  
@@ -86,7 +86,7 @@ Namespace: **JLGames.RabbitDriver.RabbitNetwork**. [`RabbitNetworkManager`](../R
 + Editor  
   Menu prefix: `Tools/RabbitDriverPro/`. Uncommented entries include Getting Started, Help, Project (`Gen LoaderSettings`, `Gen I18NSettings`, `Gen AudioSettings`), Tools, Settings, and Macros.  
 + Runtime  
-  A thin extension. [`I18NTMPText`](../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/Runtime/Extend/i18n/Component/I18NTMPText.cs) is in `Runtime/Extend/i18n/Component/` and compiles only when `TMP_PRESENT` is defined.  
+  A thin extension. `I18NTMPText` is in `Runtime/Extend/i18n/Component/` and compiles only when `TMP_PRESENT` is defined.  
 + Samples  
   Module samples. Each manual chapter ends with the matching `Samples/<module>` path.  
 

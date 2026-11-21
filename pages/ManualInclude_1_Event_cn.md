@@ -25,5 +25,5 @@
 可以继承 `EventDispatcher` 并实现自定义接口，用来扩展事件行为。  
 
 ### 1.2 示例
-[Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs](../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs)  
+`Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs`  
 ![image](assets/img/event_1.png)  
