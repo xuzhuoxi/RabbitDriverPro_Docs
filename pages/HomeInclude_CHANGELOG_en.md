@@ -1,4 +1,38 @@
-# RocketDriver Pro Changelog
+# RabbitDriver Pro Changelog
+
+## Version v2.2.0(2026.11.18)
+
+**NOTE**: The plugin directory moved from Assets/JLGames/RabbitDriver to Assets/JLGames/RabbitDriverPro. Package code now uses the JLGames.RabbitDriverPro namespace, and editor menus moved from Tools/RabbitDriver to Tools/RabbitDriverPro. The former Runtime source is now provided through precompiled DLLs.
+
+### New Features
++ Editor: Added Find Missing References to check missing references on selected scene objects and Prefabs, including missing scripts.
++ Editor: Added menu commands to enable or disable the TMP and Unity Input System scripting define symbols.
++ Samples: Added a RabbitNetwork sample.
++ Runtime: Added I18NTMPText, which binds TextMeshPro text to i18n when TMP_PRESENT is defined.
+
+### Updates & Modifications
++ Updated name: The project was renamed to **RabbitDriver Pro**, **to avoid trademark disputes**.  
++ Plugins: Synced Infra-CSharp.dll, RabbitClient.dll, RabbitDriver-Core.dll, and RabbitDriver-CoreEditor.dll.
++ Project: Upgraded the Unity editor to 2022.3.0f1.
++ Account: Removed RabbitAccount and replaced it with LocalAccount.
++ IMaterialService: Removed InitService.
++ Samples: Updated the event module sample.
++ Package: The package name is now com.JLGames.RabbitDriver. Help and Getting Started links for the manual, changelog, and issues now point at RabbitDriverPro_Docs.
++ Docs: The package manuals README_CN.md and README_EN.md were renamed to Guide_CN.md and Guide_EN.md. Added ARCHITECTURE_CN.md and ARCHITECTURE_EN.md.
++ Project: Upgraded TextMeshPro from 2.1.6 to 3.0.9.
++ Editor: Upgraded MonKey from 2021.0.6 to 2022.0.1.
++ CI: Added a manually triggered compile check that opens the project in Unity 2022.3.0f1 with a Pro Named User seat. Also added manual workflows to create a GitHub Release and to update the notes of an existing Release.
+
+### Fixes
++ ExportSettings: Fixed Sort Asset Paths and per-item Sort Paths not saving the new path order to the settings file.
++ RabbitNetwork: Fixed main-thread scheduling when a network message returns.
++ Samples: Fixed missing scripts, missing asset references, and Lua sample errors.
+
+
+
+------
+
+
 
 ## Version v2.1.1111(2023.11.11)
 

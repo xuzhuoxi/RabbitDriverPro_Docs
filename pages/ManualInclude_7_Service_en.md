@@ -1,7 +1,7 @@
 ## 7. Service Framework (Service)
-+ **JLGames.RocketDriver.CSharp.Service** provides the basic interface and behavior specification of the service framework.
-+ **JLGames.RocketDriver.Actions.Service** provides service configuration assets for Unity (**not enabled**).
-+ **JLGames.RocketDriver.Games.Service** provides common service functions.
++ **JLGames.Infra.Service** provides the service framework base types. The sample `SampleServiceBase` extends `ServiceBase`.
++ **JLGames.RabbitDriver.Actions.Service** provides the serializable service nodes `ServiceNodeGroup` and `ServiceNodeData`.
++ **JLGames.RabbitDriver.Games.Service** provides shared services such as preload and config data.
 
 ### 7.1 Design Purpose
 Game projects have some obvious characteristics: high degree of data coupling and strong system dependence.  
@@ -191,7 +191,7 @@ Only services that implement the IClearService interface will perform reset logi
 2. In the Clear function in the IClearService interface, also clear all event listeners.
 
 ### 7.5 Example
-JLGames/RocketDriver/Samples/Service  
+Assets/JLGames/RabbitDriverPro/Samples/Service  
 ![image](assets/img/service_18.png)  
 ![image](assets/img/service_19.png)  
 Service description in example:  

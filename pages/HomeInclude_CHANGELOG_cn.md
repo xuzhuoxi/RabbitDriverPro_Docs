@@ -1,4 +1,38 @@
-# RocketDriver Pro 更新日志
+# RabbitDriver Pro 更新日志
+
+## 版本 v2.2.0(2026.11.18)
+
+**注意**：插件目录由 Assets/JLGames/RocketDriver 改为 Assets/JLGames/RabbitDriverPro，包内代码命名空间改为 JLGames.RabbitDriverPro，编辑器菜单由 Tools/RocketDriver 改为 Tools/RabbitDriverPro。原 Runtime 源码改为通过预编译 DLL 提供。
+
+### 新功能
++ Editor: 增加 Find Missing References，检查所选场景对象和 Prefab 的丢失引用，包含脚本丢失。
++ Editor: 增加 TMP 与 Unity Input System 宏的开关菜单。
++ Samples: 增加 RabbitNetwork 示例。
++ Runtime: 增加 I18NTMPText，在定义 TMP_PRESENT 时把 TextMeshPro 文本接到 i18n。
+
+### 更新&修改
++ 更新名称： 项目改名为 **RabbitDriverPro**。  
++ Plugins: 同步 Infra-CSharp.dll、RabbitClient.dll、RabbitDriver-Core.dll、RabbitDriver-CoreEditor.dll。
++ Project: Unity 版本升级到 2022.3.0f1。
++ Account: 移除 RabbitAccount，改由 LocalAccount 提供。
++ IMaterialService: 删除 InitService。
++ Samples: 更新事件模块示例。
++ Package: 包名改为 com.JLGames.RabbitDriver。Help 与 Getting Started 的手册、更新日志和 Issues 地址改为 RabbitDriverPro_Docs。
++ Docs: 插件阅读手册由 README_CN.md、README_EN.md 改名为 Guide_CN.md、Guide_EN.md，并增加 ARCHITECTURE_CN.md、ARCHITECTURE_EN.md。
++ Project: TextMeshPro 由 2.1.6 升级到 3.0.9。
++ Editor: MonKey 由 2021.0.6 升级到 2022.0.1。
++ CI: 增加仅手动运行的编译检查，使用 Unity 2022.3.0f1 与 Pro Named User 席位检查脚本能否编译。另有手动创建 GitHub Release，以及手动更新已有 Release 说明的工作流。
+
+### 修复问题
++ ExportSettings: 修复 Sort Asset Paths 与单项 Sort Paths 排序后没有保存到配置文件的问题。
++ RabbitNetwork: 修复网络消息返回到主线程时的调度问题。
++ Samples: 修复示例中的脚本丢失、资源引用丢失和 Lua 示例错误。
+
+
+
+------
+
+
 
 ## 版本 v2.1.1111(2023.11.11)
 

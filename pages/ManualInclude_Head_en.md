@@ -1,178 +1,93 @@
-# Getting Start
+# Start
 
 ### Overview
-This User Manaul was designed to provide GaemDriver Pro users with a basic overview of the
-features and functionality of the tool.  
+This user guide gives RabbitDriver Pro users a basic overview of the tool, its features, and how to use it.  
 
-### Install
-1. After downloading RocketDriver Pro from Unity's Asset Store, go to: "Assets->Import Package->Custom Package...". 
-2. In the Import Assets window, find and select the RocketDriver Pro UnityPackage file. 
-3. Once Unity appears in the Import Packages window, verify that Import is selected for all projects, then click the Import button at the bottom right of the window. 
-4. All RocketDriver Pro files will be added to Assets/JLGames/RocketDriver.
+### Installation
+1. After downloading RabbitDriver Pro from the Unity Asset Store, go to: "Assets->Import Package->Custom Package...". 
+2. In the Import Assets window, find and select the RabbitDriver Pro UnityPackage file. 
+3. After Unity shows the Import Package window, make sure the items you need are selected, then click Import at the bottom right. 
+4. Plugin files are under `Assets/JLGames/RabbitDriverPro`. The framework implementation is provided as precompiled DLLs under `Assets/Plugins/JLGames/`. 
 
-You can also select the desired section to import.  
+You can also import only the parts you need.  
 
-### support
-If you want to quickly understand the important features in RocketDriver Pro, you can directly refer to the examples in JLGames/RocketDriver/Samples.  
+### Support
+To see the main features quickly, open the samples in `Assets/JLGames/RabbitDriverPro/Samples`.  
 
-If you want to learn more about the design ideas and details of each functional module in RocketDriver Pro, you can find more information and FAQs in [Online Help](https://www.xuzhuoxi.com/RocketDriver-Docs/) .  
+For design notes and module details, see the [online help](https://www.xuzhuoxi.com/RabbitDriverPro_Docs).  
 
-If you can't find the information you're looking for, please [file an issue](https://github.com/xuzhuoxi/RocketDriver-Docs/issues/new) (or submit a pull request) to describe your experience.  
+If you cannot find what you need, please [file an issue](https://github.com/xuzhuoxi/RabbitDriverPro_Docs/issues/new) (or open a pull request) and describe what happened.  
 
 Or contact the author: xuzhuoxi@gmail.com or mailxuzhuoxi@163.com  
 
 # Features
-Source code storage locations in RocketDriver Pro are regular.  
-+ The source code in **JLGames/RocketDriver/Runtime/CSharp** only depends on the C# standard library, ** does not depend on the Unity standard library. It is an extension to C#.
+RabbitDriver Pro keeps plugin files and precompiled framework DLLs separate.  
 
-+ The source code in **JLGames/RocketDriver/Runtime/Actions** depends on CSharp and the Unity standard library. It is a functional extension to the Unity engine.
++ `Assets/Plugins/JLGames/RabbitDriver-Core.dll` is the framework runtime. Its namespace is **JLGames.RabbitDriver**. The readable source is in the sibling repository `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/`.  
++ `Assets/Plugins/JLGames/RabbitDriver-CoreEditor.dll` is the framework editor extension. Its namespace is **JLGames.RabbitDriverEditor**.  
++ `Assets/Plugins/JLGames/Infra-CSharp.dll` and `RabbitClient.dll` are side dependencies. Event primitives live in **JLGames.Infra.Event**, and service primitives live in **JLGames.Infra.Service**. The source for these two DLLs is not in the RabbitDriver-Core repository.  
++ `Assets/JLGames/RabbitDriverPro` is the plugin folder. Its namespace is **JLGames.RabbitDriverPro**. It holds editor menus, a thin runtime extension, and samples. Loader, Panel, and Audio are not implemented here.  
 
-+ The source code in **JLGames/RocketDriver/Runtime/Games** depends on CSharp and Actions. It is a general implementation of system functions commonly used in the game development process.
+## Feature overview
 
-## Functional Overview
+### Framework runtime Actions
+Namespace: **JLGames.RabbitDriver.Actions**. Folder: `RabbitDriver-Core/JLGames/RabbitDriver/Actions/`.  
 
-### JLGames/RocketDriver/Runtime/CSharp
-The namespace is **JLGames.RocketDriver.CSharp**  
-+ Algs  
-  Transparent algorithm related functions  
-  + AStar  
-  A\* general algorithm  
-+ Archive  
-File archiving related functions, now including zip decompression function  
-+ Buffer  
-The byte data cache function supports reading and writing of big and small endian settings and basic data types.  
-+ DateTimex  
-Time related functions. Contains calculation conversions between time units, string formatting of times, timers that support pause and resume, and more.  
-+ Event  
-Event related functions. Contains event monitoring, removal and scheduling functions. For details, see [1.Event System(Event)](Manual_1.Event_en.html)  
-+ Extensions  
-Extensions for basic data types in CSharp.  
-+ Imagex  
-Image related functions. Now includes RGBA data objects, filter processing functions, and more.  
-+ Languages  
-Other programming language related  
-  + Lua: Lua interpreter  
-+ Mathx  
-Mathematical calculation related functions.  
-+ Net  
-Socket API definition, message encapsulation and unpacking functions, etc.  
-+ Pool  
-Object pool related functions. Contains Key-Value object pool, metadata object pool, reuse object pool, etc.  
-+ Service  
-Service framework basic support. For details, see [7. Service Framework(Service)](Manual_7.Service_en.html)  
-+ TinyJson  
-Simple Json reading and writing library. Open source from Github: [https://github.com/zanders3/json](https://github.com/zanders3/json) .  
-+ Utils  
-  Common tool functions based on CSharp  
-  + Encrypt  
-  **Encryption and decryption** related functions, now including Des, Rijandel, RSA  
-  + ArrayUtil  
-  **Array** related functions, such as array cloning, merging, type conversion, array matrix rotation and other functions  
-  + BitUtil  
-  The **bit operation** function of numeric values.  
-  + ConfusedUtil  
-  **Data Obfuscation** related functions.  
-  +DirectionUtil  
-  **Directory** related functions in the file system.  
-  + FileUtil  
-  **File** related functions in the file system.  
-  + PathUtil  
-  **Path** related functions in the file system.  
-  +PrintUtil  
-  **Print** support for object information.  
-  + ReflexUtil  
-  **Reflection** value-related functions.  
-  + TextUtil  
-  Character file read and write functions.  
-+ Xml  
-XML related function support: serialization and deserialization  
-+ Callback  
-Generic Callback Context  
-+ ICloneable  
-Generic clone interface  
-
-### JLGames/RocketDriver/Runtime/Actions  
-The namespace is **JLGames.RocketDriver.Actions**  
 + Animatorx  
-Feature support for Unity's animation system. Contains animation search, animation playback, event management and other functions.  
 + AssetIndex  
-The Editor function provides the ability to generate a "name -> path" index for assets in the project.  
 + Audio  
-Audio Manager, which provides the function of unified management of audio in the project. For details, please see [5. Audio Manager (AudioManager)](Manual_5.Audio_en.html).  
+  Audio management. See [5.Audio Manager(AudioManager)](Manual_5.Audio_en.html).  
 + Component  
-Some useful components.  
 + Component2D  
-Some useful 2D components.  
 + DateTimex  
-Time-related functions, including timers that rely on the Unity engine, cycle time slice functions, etc.  
 + ExcelExporter  
-Function support for exporting data from the third-party table export tool [ExcelExporter](https://github.com/xuzhuoxi/ExcelExporter).  
-+ Extensions  
-Extensions to commonly used data structures in Unity.  
+  Support for data exported by [ExcelExporter](https://github.com/xuzhuoxi/ExcelExporter).  
 + Graphicsx  
-Image related functions. Contains color conversion functions, image pixel data structures, texture functions, etc.  
 + i18n  
-Internationalization function. For details, see [3. Internationalization System(i18n)](Manual_3.i18n_en.html).  
+  Internationalization. See [3.Internationalization System(i18n)](Manual_3.i18n_en.html). The plugin also provides `I18NTMPText` when `TMP_PRESENT` is defined.  
 + Jsonx  
-Related functions for Json processing.  
 + Languages  
-  + Lua: Lua extension support on Unity engine  
+  + Lua: Lua support on Unity. See [9. Lua Interpreter](Manual_9.Lua_en.html).  
 + Layer  
-Unity displays the structural layered design capabilities.  
+  Display layers, used with panel management. See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html).  
 + Loaderx  
-Resource loading management module. For details, see [2. Loader System (Loader))](Manual_2.Loader_en.html).  
+  Resource loading. See [2.Loader System(Loader)](Manual_2.Loader_en.html).  
 + Localx  
-Depends on the local storage capabilities of PlayerPrefs.  
++ Page  
 + Pool  
-The object pool function extends the object pool function in JLGames/RocketDriver/Runtime/CSharp/Pool, and adds parts related to Unity.  
 + Service  
-Service framework Unity support. For details, see [7. Service Framework(Service)](Manual_7.Service_en.html)  
-+ TheadEvent  
-Event related functions. Added Unity multithreading support to JLGames/RocketDriver/Runtime/CSharp/Event.  
+  Serializable service-node data. See [7.Service Framework(Service)](Manual_7.Service_en.html).  
 + UIElements  
-Editor function. It is an extension to the UIElements functionality in Unity.  
 + Utils  
-  Rely on common functions of Unity.   
-  + CameraUtil  
-  **Camera** related functions.  
-  + CaptureUtil  
-  **Screenshot** related functions.  
-  + ComponentUtil  
-  **Component** related functions.  
-  +DebugUtil  
-  **Debug printing** related functions.  
-  + GeometryUtil  
-  **Geometric calculation** related functions.  
-  + IdentifyUtil  
-  **Machine Id** related functions.  
-  + ImageUtil  
-  **Image** related functions.  
-  + MathfUtil  
-  **Mathematical calculation** related functions  
-  + PositionUtil  
-  Unity object **position calculation** related functions.  
-  + TilemapUtil  
-  Common public behavior under the **UnityEngine.Tilemaps** component.  
-  + TransformUtil  
-  **UnityEngine.Transform** component related extension functions.  
-  + UnityPathUtil  
-  Untiy-related path handling functions.
 + Wait  
-Unity coroutine related functions.  
 
-### JLGames/RocketDriver/Runtime/Games  
-The namespace is **JLGames.RocketDriver.Games**  
+### Framework runtime Games
+Namespace: **JLGames.RabbitDriver.Games**. Folder: `RabbitDriver-Core/JLGames/RabbitDriver/Games/`.  
+
 + LocalAccount  
-Local account storage function.  
+  Local accounts.  
 + NetManager  
-Network connection management, virtual servers. For details, see [4. Network Manager (NetManager)](Manual_4.Net_en.html).  
+  Connection-instance registry, plus a virtual server and client for use without a real network. The entry point is [`NetManager.Shared`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/NetManager/NetManager.cs). See [4.Net Manager(NetManager)](Manual_4.Net_en.html).  
 + PanelManager  
-Panel management module. For details, see [6. Panel Manager (PanelManager)](Manual_6.Panel_en.html)
-+RpgMaterial  
-Game data management system. Please see [8.RPG Material Data System(RpgMaterial)](Manual_8.RpgMaterial_en.html) for details.  
+  Panel management. The entry point is [`PanelManagerShared.Manager`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/PanelManagerShared.cs). See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html).  
++ RpgMaterial  
+  Game material data. See [8.Rpg Material Data System(RpgMaterial)](Manual_8.RpgMaterial_en.html).  
 + Service  
-Common service instances under the service framework. For details, see [7. Service Framework(Service)](Manual_7.Service_en.html).  
+  Shared services such as preload and config data. See [7.Service Framework(Service)](Manual_7.Service_en.html).  
 + Tiledx  
-Data interpretation capabilities for third-party software [Tiled](https://www.mapeditor.org/).  
++ TipsManager  
 
-# Common function modules
+### RabbitNetwork
+Namespace: **JLGames.RabbitDriver.RabbitNetwork**. [`RabbitNetworkManager`](../RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/RabbitNetwork/RabbitNetworkManager.cs) is the networking component placed in a scene. The sample is `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`.  
+
+### Plugin folder
+`Assets/JLGames/RabbitDriverPro`  
+
++ Editor  
+  Menu prefix: `Tools/RabbitDriverPro/`. Uncommented entries include Getting Started, Help, Project (`Gen LoaderSettings`, `Gen I18NSettings`, `Gen AudioSettings`), Tools, Settings, and Macros.  
++ Runtime  
+  A thin extension. [`I18NTMPText`](../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/Runtime/Extend/i18n/Component/I18NTMPText.cs) is in `Runtime/Extend/i18n/Component/` and compiles only when `TMP_PRESENT` is defined.  
++ Samples  
+  Module samples. Each manual chapter ends with the matching `Samples/<module>` path.  
+
+# Common modules

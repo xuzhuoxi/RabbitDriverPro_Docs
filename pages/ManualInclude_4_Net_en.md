@@ -1,9 +1,8 @@
 ## 4. Network management extension module (NetManager)
-Easy-to-use network link management module  
-+ **JLGames.RocketDriver.CSharp.Net** provides a C# package for Socket API, which enables developers to develop protocols such as TCP, UDP, HTTP(HTTPS), WebSocket(WebSockets) on the same set of APIs.  
-+ **JLGames.RocketDriver.CSharp.Net** also provides support and extension for data packing and unpacking.  
-+ Management of link references is available in **JLGames.RocketDriver.Games.NetManager**.  
-+ Extended support for stand-alone servers in **JLGames.RocketDriver.Games.NetManager.Virtual**, which can simulate the behavior of server protocol capture and logic processing without an actual network connection.  
+Connection registry, plus a virtual server and client for use without a real network.  
++ **JLGames.RabbitDriver.Games.NetManager** registers connection instances. The entry point is `NetManager.Shared`. It is not an implementation of a transport protocol.  
++ **JLGames.RabbitDriver.Games.NetManager.Virtual** provides `VirtualServer` and `VirtualClient` for simulating requests and pushes without a real network connection.  
++ The networking component is `RabbitNetworkManager` in **JLGames.RabbitDriver.RabbitNetwork**. The sample is `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`.
 
 ### 4.1 Use of VirtualServer
 
@@ -78,5 +77,5 @@ NetManager.Shared.GetClient<IVirtualClient>("client")
 ![image](assets/img/net_14.png)  
 
 ### 4.3 Example
-JLGames/RocketDriver/Samples/NetManager  
+Assets/JLGames/RabbitDriverPro/Samples/NetManager  
 ![image](assets/img/net_6.png)  

@@ -2,18 +2,18 @@
 这是一套通用的游戏数据管理系统。  
 针对玩家的数值型数据，以KTV(Key-Type-Value)形式进行管理。  
 
-+ **JLGames.RocketDriver.Games.RpgMaterial** 
++ **JLGames.RabbitDriver.Games.RpgMaterial** 
   提供了Rpg材料数据系统的功能支持。依赖关系如下：  
   ![image](assets/img/RpgMaterial_Dependencies.png)  
-  + **JLGames.RocketDriver.Games.RpgMaterial.Common**
+  + **JLGames.RabbitDriver.Games.RpgMaterial.Common**
   系统的基础数据结构。  
-  + **JLGames.RocketDriver.Games.RpgMaterial.Material**
+  + **JLGames.RabbitDriver.Games.RpgMaterial.Material**
   系统中关于材料定义的数据结构。  
-  + **JLGames.RocketDriver.Games.RpgMaterial.User**
+  + **JLGames.RabbitDriver.Games.RpgMaterial.User**
   系统中关于用户数据存储的数据结构。  
-  + **JLGames.RocketDriver.Games.RpgMaterial.Service**
+  + **JLGames.RabbitDriver.Games.RpgMaterial.Service**
   系统中关于对外提供接口支持的数据结构。  
-  + **JLGames.RocketDriver.Games.RpgMaterial.Asset**
+  + **JLGames.RabbitDriver.Games.RpgMaterial.Asset**
   系统中针对Unity进行序列化的数据结构。  
 
 ### 8.1 设计思路
@@ -269,7 +269,7 @@
   带唯一Id的材料用户数据(带获得时间戳)的序列化结构，用于Unity面板。  
 
 ### 8.2 使用
-依赖于服务框架(JLGames.RocketDriver.Games.Service)，具体使用流程与一般服务一致。  
+依赖于服务框架(JLGames.RabbitDriver.Games.Service)，具体使用流程与一般服务一致。  
 
 #### 8.2.1 材料数据分类
 按照业务需求，把材料配置表数据进行分类  
@@ -298,7 +298,7 @@
 + 默认支持触发器功能，支持用户数据变更时触执行。  
 
 ### 8.3 示例
-JLGames/RocketDriver/Samples/RpgMaterial   
+Assets/JLGames/RabbitDriverPro/Samples/RpgMaterial   
 ![image](assets/img/RpgMaterial_1.jpg)   
 + 示例说明  
   1. 提供了Resource，Item，Giftbag三种材料类型的示例。  

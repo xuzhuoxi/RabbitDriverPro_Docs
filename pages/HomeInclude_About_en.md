@@ -1,6 +1,6 @@
-# About RocketDriver Pro
+# About RabbitDriver Pro
 
-###  RocketDriver Pro
+###  RabbitDriver Pro
 Version: {{ site.version }}  
 Built on：{{site.build}}  
 
@@ -10,4 +10,4 @@ Built on：{{site.build}}
 ### License Type
 Seat  
 
-### Copyright © 2022-2023 xuzhuoxi.
+### Copyright © 2019-2023 xuzhuoxi.

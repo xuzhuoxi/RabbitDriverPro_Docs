@@ -1,6 +1,6 @@
-# 关于 RocketDriver Pro
+# 关于 RabbitDriver Pro
 
-### RocketDriver Pro
+### RabbitDriver Pro
 版本：{{ site.version }}  
 构建日期：{{site.build}}  
 
@@ -10,4 +10,4 @@
 ### 许可证类型
 席位  
 
-### Copyright © 2022-2023 xuzhuoxi.
+### Copyright © 2019-2023 xuzhuoxi.

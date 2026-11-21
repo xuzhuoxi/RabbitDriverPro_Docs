@@ -45,3 +45,21 @@ A third-party json interpreter is used in the Runtime.
 作者: **Alex Parker**  
 URL: https://github.com/zanders3/json  
 License: **MIT** (https://github.com/zanders3/json/blob/master/LICENSE)   
+
+### 6. Infra-CSharp.dll
+A C# base library that supports Runtime and Editor.  
+Name: **Infra-CSharp**  
+Author: **xuzhuoxi**  
+URL: https://github.com/xuzhuoxi/Infra-CSharp
+
+### 7. RabbitClient.dll
+The client connection library for Rabbit-Home and Rabbit-Server.  
+Name: **RabbitClient**  
+Author: **xuzhuoxi**  
+URL: https://github.com/xuzhuoxi/RabbitClient-CSharp
+
+### 8. RabbitDriver-Core.dll, RabbitDriver-CoreEditor.dll
+Core library of RabbitDriverPro.  
+Name: **RabbitDriver-Core**  
+Author: **xuzhuoxi**  
+URL: https://github.com/xuzhuoxi/RabbitDriver-Core 

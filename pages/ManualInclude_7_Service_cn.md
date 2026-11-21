@@ -1,7 +1,7 @@
 ## 7. 服务框架(Service)
-+ **JLGames.RocketDriver.CSharp.Service** 提供了服务框架的基础接口与行为规范。
-+ **JLGames.RocketDriver.Actions.Service** 提供了针对Unity的服务配置资产(**未启用**)。
-+ **JLGames.RocketDriver.Games.Service** 提供了常用的服务功能。
++ **JLGames.Infra.Service** 提供服务框架的基础类型。示例中的 `SampleServiceBase` 继承 `ServiceBase`。
++ **JLGames.RabbitDriver.Actions.Service** 提供可序列化的服务节点 `ServiceNodeGroup` 与 `ServiceNodeData`。
++ **JLGames.RabbitDriver.Games.Service** 提供预加载与配置数据等常用服务。
 
 ### 7.1 设计目的
 游戏项目有一些比较明显的特点：数据偶合度高、系统依赖性强。  
@@ -191,7 +191,7 @@ ServiceConfig中获取服务实例的函数有多个，但最终调用的都是G
 2. 在IClearService接口中的Clear函数中把事件监听也全部清除。
 
 ### 7.5 示例
-JLGames/RocketDriver/Samples/Service  
+Assets/JLGames/RabbitDriverPro/Samples/Service  
 ![image](assets/img/service_18.png)  
 ![image](assets/img/service_19.png)  
 示例中的服务说明：  

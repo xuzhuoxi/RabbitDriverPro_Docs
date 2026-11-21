@@ -45,3 +45,21 @@ Runtime中使用到的简单Json解释器。
 作者: **Alex Parker**  
 URL: https://github.com/zanders3/json  
 License: **MIT** (https://github.com/zanders3/json/blob/master/LICENSE)   
+
+### 6. Infra-CSharp.dll
+C#基础库，为Runtime和Editor提供支持
+库名称: **Infra-CSharp**  
+作者: **xuzhuoxi**  
+URL: https://github.com/xuzhuoxi/Infra-CSharp
+
+### 7. RabbitClient.dll
+Rabbit-Home 和 Rabbit-Server 对应的客户端连接库
+库名称: **RabbitClient**  
+作者: **xuzhuoxi**  
+URL: https://github.com/xuzhuoxi/RabbitClient-CSharp
+
+### 8. RabbitDriver-Core.dll、RabbitDriver-CoreEditor.dll
+RabbitDriverPro 核心库
+库名称: **RabbitDriver-Core**  
+作者: **xuzhuoxi**  
+URL: https://github.com/xuzhuoxi/RabbitDriver-Core 

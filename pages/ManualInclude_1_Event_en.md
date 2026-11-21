@@ -1,33 +1,29 @@
 ## 1. Event - Efficient event module, supports Unity multithreading
-The event adopts the "**monitoring**-**capture**" mechanism, which supports the settings of the number of captures and capture priority during monitoring.  
-+ **JLGames.RocketDriver.CSharp.Event** is responsible for the core logic implementation of the event system.
-+ **JLGames.RocketDriver.Actions.ThreadEvent** provides support for multithreading.
+The event uses a **listen**-**capture** mechanism. A listener can set capture count and priority.  
++ Event types come from **JLGames.Infra.Event**. The sample uses `EventDispatcher` as an `IThreadEventDispatcher`.  
++ `Actions/ThreadEvent` in the framework repository is entirely commented out and is not the current multithreading implementation.
 
 ### 1.1 Core functions - add listeners, remove listeners, dispatch events
 
 #### 1.1.1 Monitoring
-The `AddEventListener` series of functions in the interface IEventListener are used to add event listeners.  
-The logic implementation has been completed in the implementation class EventDispathver.  
+`EventDispatcher.AddEventListener` adds an event listener. It can take a priority, a capture count, and a tag.  
 ![image](assets/img/event_2.png)  
 
 #### 1.1.2 remove monitor
-The `RemoveEventListener` series of functions in the interface IEventListener are used to remove event listeners.  
-The logic implementation has been completed in the implementation class EventDispathver.  
+`EventDispatcher.RemoveEventListener` removes an event listener.  
 ![image](assets/img/event_3.png)  
 
 #### 1.1.3 Distributing events
-The `DispatchEvent` series of functions in the interface IEventDispatcher are used to distribute events.  
-The logic implementation has been completed in the implementation class EventDispathver.  
+`EventDispatcher.DispatchEvent` dispatches an event.  
 ![image](assets/img/event_4.png)  
 
 #### 1.1.4 Multithreading support
-The functions declared in the interface IThreadEventProxy define the multithreading support specification.  
-The logic implementation has been completed in the implementation class ThreadEventDispatcher.  
+The sample treats `EventDispatcher` as `IThreadEventDispatcher`. After `SetThreadEventContext(SynchronizationContext.Current)`, `DispatchEvent` can be called from another thread. `ClearThreadEventContext` clears that context.  
 ![image](assets/img/event_5.png)  
 
 #### 1.1.5 Extensions
-Extends EventDispathver or ThreadEventDispatcher and implements a custom interface that can be used to extend event behavior.  
+Extend `EventDispatcher` and implement a custom interface to customize event behavior.  
 
 ### 1.2 Example
-JLGames/RocketDriver/Samples/Event  
+[Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs](../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/Samples/Event/Scripts/EventDemo.cs)  
 ![image](assets/img/event_1.png)  

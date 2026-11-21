@@ -1,9 +1,8 @@
 ## 4. 网络管理扩展模块(NetManager)
-简单易用的网络链接管理模块  
-+ **JLGames.RocketDriver.CSharp.Net** 提供了C# 针对 Socket API 的一个封装， 使开发者可以对TCP、UDP、 HTTP(HTTPS)、WebSocket(WebSockets)等协议在同一套API上进行开发。
-+ **JLGames.RocketDriver.CSharp.Net** 同时提供了对数据进行封包解包的支持与扩展 。
-+ **JLGames.RocketDriver.Games.NetManager** 中提供了对链接引用的管理功能。 
-+ **JLGames.RocketDriver.Games.NetManager.Virtual** 中单机服务器的扩展支持，可以为无实际网络链接的情况下模拟服务器协议捕捉与逻辑处理的行为。 
+简单易用的连接登记，以及没有真实网络时的虚拟服务端 / 客户端。  
++ **JLGames.RabbitDriver.Games.NetManager** 登记连接实例，入口是 `NetManager.Shared`。它不是某一种传输协议的实现。  
++ **JLGames.RabbitDriver.Games.NetManager.Virtual** 提供 `VirtualServer` 与 `VirtualClient`，用于在没有实际网络连接时模拟请求与推送。  
++ 联机组件是 **JLGames.RabbitDriver.RabbitNetwork** 中的 `RabbitNetworkManager`。示例在 `Assets/JLGames/RabbitDriverPro/Samples/RabbitNetwork`。 
 
 ### 4.1 VirtualServer的使用
 
@@ -78,5 +77,5 @@ NetManager.Shared.GetClient<IVirtualClient>("client")
 ![image](assets/img/net_14.png)  
 
 ### 4.3 示例
-JLGames/RocketDriver/Samples/NetManager  
+Assets/JLGames/RabbitDriverPro/Samples/NetManager  
 ![image](assets/img/net_6.png)  
