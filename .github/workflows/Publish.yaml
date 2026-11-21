@@ -1,7 +1,10 @@
+name: Publish
+
 on:
   push:
-  pull_request:
-    types: [opened, synchronize]
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
