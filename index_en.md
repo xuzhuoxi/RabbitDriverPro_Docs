@@ -10,7 +10,7 @@ This is a game development framework to assist in the development of game applic
 You can purchase it in the [Unity Asset Store](https://assetstore.unity.com/packages/slug/234202) and download the plugin package in the Unity Package Manager and use it in Unity.  
 
 The Beta Version is provided here, **Please do not** use the beta version for commercial projects.  
-Beta version: [Download](downloads/RabbitDriver Pro - Beta.unitypackage)  
+Beta version: [Download](downloads/RabbitDriver%20Pro%20-%20Beta.unitypackage)  
 
 For other questions,, please contact **xuzhuoxi@gmail.com** or **mailxuzhuoxi@163.com**  
 

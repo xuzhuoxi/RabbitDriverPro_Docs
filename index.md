@@ -10,7 +10,7 @@ lang: zh-CN
 您可以在[Unity资源商店](https://assetstore.unity.com/packages/slug/234202) 购买，并在 Unity Package Manager 中下载插件包并在Unity中使用。  
 
 这里提供Beta体验版本，**请不要**把Beta体验版本用于商业项目。  
-Beta体验版本：[下载](downloads/RabbitDriver Pro - Beta.unitypackage)  
+Beta体验版本：[下载](downloads/RabbitDriver%20Pro%20-%20Beta.unitypackage)  
 
 如有其它问题，请联系 **xuzhuoxi@gmail.com** 或 **mailxuzhuoxi@163.com**。  
 
