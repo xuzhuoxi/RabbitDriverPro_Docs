@@ -29,6 +29,7 @@
 
 | 读者看到的 | 壳（少改） | 正文（主要改这里） |
 |------------|------------|--------------------|
+| 首页 | — | `index.md`、`index_en.md`。产品名用 `displayName`；下载文件名以 `downloads/` 里的实际文件为准 |
 | 阅读手册 | `pages/Home_README_cn.md`、`_en.md` | `pages/HomeInclude_README_*.md` |
 | 更新日志 | `pages/Home_CHANGELOG_*.md` | `pages/HomeInclude_CHANGELOG_*.md` |
 | 第三方说明 | `pages/Home_ThirdPartyNotices_*.md` | `pages/HomeInclude_ThirdPartyNotices_*.md` |

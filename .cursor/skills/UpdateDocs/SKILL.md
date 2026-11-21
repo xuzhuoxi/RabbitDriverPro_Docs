@@ -2,7 +2,7 @@
 name: UpdateDocs
 description: >-
   [RabbitDriverPro_Docs]: 根据并列仓库 RabbitDriver-Core 的 C# 源码，以及 RabbitDriverPro_UnityDev 的插件源码和
-  Samples 示例，更新 RabbitDriverPro_Docs 的 pages 与 _data。
+  Samples 示例，更新 RabbitDriverPro_Docs 的 pages、_data，以及根目录 index.md、index_en.md。
   在用户要求更新文档站、用户手册、阅读手册、更新日志、导航文案、i18n YAML，
   或点名 UpdateDocs 时使用。
 disable-model-invocation: true
@@ -16,7 +16,7 @@ disable-model-invocation: true
 
 | 仓库 | 从文档站出发 |
 |------|----------------|
-| 文档站（只改 `pages/`、`_data/`） | `.` |
+| 文档站（只改 `pages/`、`_data/`、根目录 `index.md` / `index_en.md`） | `.` |
 | 框架源码 | `../RabbitDriver-Core` |
 | Unity 工程、插件源码、示例 | `../RabbitDriverPro_UnityDev` |
 
@@ -46,10 +46,11 @@ disable-model-invocation: true
 | `pages/*Include*.md` | 正文。阅读手册、更新日志、手册各章、关于、FAQ、第三方说明都在这里 |
 | `pages/Manual_*.md`、`pages/Home_*.md` | 壳。front matter + `include_relative`。只在 `title`、`page_id`、`lang` 或被包含文件名必须变化时改 |
 | `_data/i18n_zh-CN.yaml`、`_data/i18n_en-US.yaml` | 导航文案、手册目录标题、联系表单文案。两份的键树必须一致 |
+| `index.md`、`index_en.md` | 站点首页。产品名与 `package.json` 的 `displayName` 一致，中英事实同步。下载链接用 `downloads/` 里的实际文件名。不要改 `layout`、`page_id`、`lang` |
 
 不要改这些，除非用户在同一次要求里点名：
 
-- `_config.yml`、`_layouts/`、`_includes/`、`_sass/`、`assets/`、根目录 `index.md` / `index_en.md`
+- `_config.yml`、`_layouts/`、`_includes/`、`_sass/`、`assets/`
 - `_data/i18n.babel`（BabelEdit 工程元数据，站点运行时不读它）
 - `../RabbitDriver-Core` 与 `../RabbitDriverPro_UnityDev` 里的任何文件
 
@@ -113,7 +114,7 @@ disable-model-invocation: true
 
 ## 禁止
 
-- 不改 Core、UnityDev、主题布局、`_config.yml`、根目录首页
+- 不改 Core、UnityDev、主题布局、`_config.yml`
 - 不把注释掉的类型写成功能。`Actions/ThreadEvent` 里的类型体是注释；`MainThread` 不要写成已提供的多线程事件系统。是否编译以文件内容与 csproj 为准，每次重新确认
 - 不把 `Games/NetManager` 写成 http/udp/quic/ws 协议全家桶。它是连接登记和虚拟网络。联机组件在 `RabbitNetwork`
 - 不把 `Assets/JLGames/RabbitDriverPro/Runtime` 写成 Loader / Panel / Audio 的实现位置
@@ -131,6 +132,7 @@ disable-model-invocation: true
 - [ ] `manual.nav[].include` 指向的文件存在；`page_id` 与 `id` 一致
 - [ ] `show: 'yes'` 的章节都有中英 Include
 - [ ] 正文中的产品名、命名空间、菜单不再使用 RocketDriver（历史更新日志里描述当年改名的句子可以保留）
+- [ ] `index.md` 与 `index_en.md` 的产品名与 `displayName` 一致
 - [ ] 插件版本来自 `package.json`，没有沿用 Include 或 Guide 里的旧版本
 - [ ] 未改 `_config.yml`、布局、资源、两个源码仓库
 - [ ] 未把 Infra / RabbitClient 写成有源码链接的模块
