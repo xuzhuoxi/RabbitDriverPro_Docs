@@ -229,7 +229,7 @@
    实现 IUserMaterialSet 的抽象类，实现部分功能，子类可重写行为。  
 
 #### 8.1.4 Service模块设计说明
-+ 材料 Service 的设计扩展了[服务框架](Manual-7.Service_cn.md)功能。
++ 材料 Service 的设计扩展了[服务框架](Manual_7.Service_cn.md)功能。
 + 材料 Service 的分类应该与类型(指配置数据中的类型)一一对应，也就是一种类型创建一个Service。
 + 提供了材料 Service 的基本接口定义。
 + 提供了可显示材料、可操作材料、有价值材料的基本接口定义。

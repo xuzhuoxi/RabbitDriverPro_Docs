@@ -23,3 +23,7 @@ github:
   issues_new_url: https://github.com/xuzhuoxi/RabbitDriverPro_Docs/issues/new
   
 formspree_form_path : 'f/mpznbjpa'
+
+# 主题示例页，没有页面语言，不参与站点构建
+exclude:
+  - docs

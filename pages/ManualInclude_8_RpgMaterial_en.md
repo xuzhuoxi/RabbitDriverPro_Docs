@@ -228,7 +228,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
    The abstract class that implements IUserMaterialSet, implements some functions, and subclasses can override the behavior.  
 
 #### 8.1.4 Service Module Design Instructions
-+ The design of material Service extends the function of [Service Framework](Manual-7.Service_cn.md).
++ The design of material Service extends the function of [Service Framework](Manual_7.Service_en.md).
 + The classification of the material Service should correspond to the type (referring to the type in the configuration data) one-to-one, that is, a type creates a Service.
 + Provides the basic interface definition of Material Service.
 + Provides basic interface definitions for displayable materials, actionable materials, and valuable materials.
