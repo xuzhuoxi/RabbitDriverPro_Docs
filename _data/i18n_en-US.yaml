@@ -12,13 +12,13 @@ contact:
   text: Have a thought? You can contact author!
   title: Contact Author
 home:
-  description: RocketDriver Pro is a game framework for Unity engine
+  description: RabbitDriver Pro is a game framework for Unity engine
   downloads:
     download: Download
     file_an: File an
     issue: Issue
     manual: Manual
-    manual_pdf: downloads/RocketDriverPro-Manual_en.pdf
+    manual_pdf: downloads/RabbitDriverPro-Manual_en.pdf
     package: Package
   logo: /assets/img/logo.webp
   nav:
@@ -55,7 +55,7 @@ home:
       show: 'yes'
       text: Contact Author
   page: /index_en.html
-  title: RocketDriver Pro
+  title: RabbitDriver Pro
 i18n:
   link: zh-CN
 manual:

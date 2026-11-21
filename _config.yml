@@ -1,10 +1,10 @@
-title: RocketDriver Pro
+title: RabbitDriver Pro
 show_logo: true
 show_downloads: true
 google_analytics: true
 theme: jekyll-theme-minimal
 
-version: '2.1.1111'
+version: '2.2.0'
 build: '2023.11.11'
 
 author:
@@ -16,10 +16,10 @@ unity:
   publisher_url: https://assetstore.unity.com/publishers/74539
 
 home:
-  url: https://www.xuzhuoxi.com/RocketDriver-Docs
+  url: https://www.xuzhuoxi.com/RabbitDriverPro_Docs
 
 github:
-  issues_url: https://github.com/xuzhuoxi/RocketDriver-Docs/issues
-  issues_new_url: https://github.com/xuzhuoxi/RocketDriver-Docs/issues/new
+  issues_url: https://github.com/xuzhuoxi/RabbitDriverPro_Docs/issues
+  issues_new_url: https://github.com/xuzhuoxi/RabbitDriverPro_Docs/issues/new
   
 formspree_form_path : 'f/mpznbjpa'
