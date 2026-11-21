@@ -36,7 +36,7 @@ Namespace: **JLGames.RabbitDriver.Actions**. Folder: `RabbitDriver-Core/JLGames/
 + Animatorx  
 + AssetIndex  
 + Audio  
-  Audio management. See [5.Audio Manager(AudioManager)](Manual_5.Audio_en.html).  
+  Audio management. See [5.Audio Manager(AudioManager)](Manual_5.Audio_en.html#5).  
 + Component  
 + Component2D  
 + DateTimex  
@@ -44,19 +44,19 @@ Namespace: **JLGames.RabbitDriver.Actions**. Folder: `RabbitDriver-Core/JLGames/
   Support for data exported by [ExcelExporter](https://github.com/xuzhuoxi/ExcelExporter).  
 + Graphicsx  
 + i18n  
-  Internationalization. See [3.Internationalization System(i18n)](Manual_3.i18n_en.html). The plugin also provides `I18NTMPText` when `TMP_PRESENT` is defined.  
+  Internationalization. See [3.Internationalization System(i18n)](Manual_3.i18n_en.html#3). The plugin also provides `I18NTMPText` when `TMP_PRESENT` is defined.  
 + Jsonx  
 + Languages  
-  + Lua: Lua support on Unity. See [9. Lua Interpreter](Manual_9.Lua_en.html).  
+  + Lua: Lua support on Unity. See [9. Lua Interpreter](Manual_9.Lua_en.html#9).  
 + Layer  
-  Display layers, used with panel management. See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html).  
+  Display layers, used with panel management. See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html#6).  
 + Loaderx  
-  Resource loading. See [2.Loader System(Loader)](Manual_2.Loader_en.html).  
+  Resource loading. See [2.Loader System(Loader)](Manual_2.Loader_en.html#2).  
 + Localx  
 + Page  
 + Pool  
 + Service  
-  Serializable service-node data. See [7.Service Framework(Service)](Manual_7.Service_en.html).  
+  Serializable service-node data. See [7.Service Framework(Service)](Manual_7.Service_en.html#7).  
 + UIElements  
 + Utils  
 + Wait  
@@ -67,13 +67,13 @@ Namespace: **JLGames.RabbitDriver.Games**. Folder: `RabbitDriver-Core/JLGames/Ra
 + LocalAccount  
   Local accounts.  
 + NetManager  
-  Connection-instance registry, plus a virtual server and client for use without a real network. The entry point is `NetManager.Shared`. See [4.Net Manager(NetManager)](Manual_4.Net_en.html).  
+  Connection-instance registry, plus a virtual server and client for use without a real network. The entry point is `NetManager.Shared`. See [4.Net Manager(NetManager)](Manual_4.Net_en.html#4).  
 + PanelManager  
-  Panel management. The entry point is `PanelManagerShared.Manager`. See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html).  
+  Panel management. The entry point is `PanelManagerShared.Manager`. See [6.Panel Manager(PanelManager)](Manual_6.Panel_en.html#6).  
 + RpgMaterial  
-  Game material data. See [8.Rpg Material Data System(RpgMaterial)](Manual_8.RpgMaterial_en.html).  
+  Game material data. See [8.Rpg Material Data System(RpgMaterial)](Manual_8.RpgMaterial_en.html#8).  
 + Service  
-  Shared services such as preload and config data. See [7.Service Framework(Service)](Manual_7.Service_en.html).  
+  Shared services such as preload and config data. See [7.Service Framework(Service)](Manual_7.Service_en.html#7).  
 + Tiledx  
 + TipsManager  
 

@@ -36,7 +36,7 @@ RabbitDriver Pro 的代码分开放在插件目录和预编译 DLL 中。
 + Animatorx  
 + AssetIndex  
 + Audio  
-  音频管理。详细请看[5.音频管理模块(AudioManager)](Manual_5.Audio_cn.html)。  
+  音频管理。详细请看[5.音频管理模块(AudioManager)](Manual_5.Audio_cn.html#5)。  
 + Component  
 + Component2D  
 + DateTimex  
@@ -44,19 +44,19 @@ RabbitDriver Pro 的代码分开放在插件目录和预编译 DLL 中。
   对第三方导表工具 [ExcelExporter](https://github.com/xuzhuoxi/ExcelExporter) 导出数据的支持。  
 + Graphicsx  
 + i18n  
-  国际化。详细请看[3.国际化(i18n)](Manual_3.i18n_cn.html)。插件在定义 `TMP_PRESENT` 时另外提供 `I18NTMPText`。  
+  国际化。详细请看[3.国际化(i18n)](Manual_3.i18n_cn.html#3)。插件在定义 `TMP_PRESENT` 时另外提供 `I18NTMPText`。  
 + Jsonx  
 + Languages  
-  + Lua：Unity 上的 Lua 支持。详细请看[9. Lua解释器](Manual_9.Lua_cn.html)。  
+  + Lua：Unity 上的 Lua 支持。详细请看[9. Lua解释器](Manual_9.Lua_cn.html#9)。  
 + Layer  
-  显示层级。与面板管理一起使用，见[6.面板管理模块(PanelManager)](Manual_6.Panel_cn.html)。  
+  显示层级。与面板管理一起使用，见[6.面板管理模块(PanelManager)](Manual_6.Panel_cn.html#6)。  
 + Loaderx  
-  资源加载。详细请看[2.加载管理模块(Loader)](Manual_2.Loader_cn.html)。  
+  资源加载。详细请看[2.加载管理模块(Loader)](Manual_2.Loader_cn.html#2)。  
 + Localx  
 + Page  
 + Pool  
 + Service  
-  可序列化的服务节点数据。服务框架见[7.服务框架(Service)](Manual_7.Service_cn.html)。  
+  可序列化的服务节点数据。服务框架见[7.服务框架(Service)](Manual_7.Service_cn.html#7)。  
 + UIElements  
 + Utils  
 + Wait  
@@ -67,13 +67,13 @@ RabbitDriver Pro 的代码分开放在插件目录和预编译 DLL 中。
 + LocalAccount  
   本地账号。  
 + NetManager  
-  连接实例登记，以及无真实网络时的虚拟服务端 / 客户端。入口是 `NetManager.Shared`。详细请看[4.网络管理扩展模块(NetManager)](Manual_4.Net_cn.html)。  
+  连接实例登记，以及无真实网络时的虚拟服务端 / 客户端。入口是 `NetManager.Shared`。详细请看[4.网络管理扩展模块(NetManager)](Manual_4.Net_cn.html#4)。  
 + PanelManager  
-  面板管理。入口是 `PanelManagerShared.Manager`。详细请看[6.面板管理模块(PanelManager)](Manual_6.Panel_cn.html)。  
+  面板管理。入口是 `PanelManagerShared.Manager`。详细请看[6.面板管理模块(PanelManager)](Manual_6.Panel_cn.html#6)。  
 + RpgMaterial  
-  游戏材料数据。详细请看[8.Rpg材料数据系统(RpgMaterial)](Manual_8.RpgMaterial_cn.html)。  
+  游戏材料数据。详细请看[8.Rpg材料数据系统(RpgMaterial)](Manual_8.RpgMaterial_cn.html#8)。  
 + Service  
-  预加载与配置数据等常用服务。详细请看[7.服务框架(Service)](Manual_7.Service_cn.html)。  
+  预加载与配置数据等常用服务。详细请看[7.服务框架(Service)](Manual_7.Service_cn.html#7)。  
 + Tiledx  
 + TipsManager  
 

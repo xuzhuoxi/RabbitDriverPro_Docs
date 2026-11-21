@@ -1,4 +1,4 @@
-## 8. Rpg Material Data System
+## <span id="8">8. Rpg Material Data System
 This is a general game data management system.  
 The player's numerical data is managed in the form of KTV (Key-Type-Value).  
 + **JLGames.RabbitDriver.Games.RpgMaterial**
@@ -15,7 +15,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
   + **JLGames.RabbitDriver.Games.RpgMaterial.Asset**
   The data structure in the system that is serialized for Unity.  
 
-### 8.1 Design Ideas
+### <span id="8.1">8.1 Design Ideas
 + Metadata (configuration data) of user data is managed in **KTD(Key-Type-Define)** format.
 + The source of metadata (configuration data) can be derived from value table export, server acquisition, asset configuration, etc.
 + Through **KT(Key&Type)**, the metadata (configuration data) definition (Define) can be obtained, and the validity can be checked when the user data is set.
@@ -25,7 +25,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
 + Through **KT(Key&Type)** or **KTU(Key&Type&UId)**, the player's specific data (Value) can be obtained for calculation and display.
 + Changes to user data are issued in the form of notifications, supporting both incremental changes and direct updates.
 
-#### 8.1.1 Common module design instructions
+#### <span id="8.1.1">8.1.1 Common module design instructions
 + Provides basic management functions of data objects and defines the most basic interface of data objects.
 + Provide the most basic configuration data interface definition and related data structure implementation.
 + Provide the most basic user data interface definition and related data structure implementation.
@@ -113,7 +113,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
 + DataRandomUtils
   Random logic for the class implementing the IDataRandomable interface  
 
-#### 8.1.2 Material Module Design Instructions
+#### <span id="8.1.2">8.1.2 Material Module Design Instructions
 + Provides common interface definitions and related implementations for configuration data.
 + Combination of interfaces and data structures in Common.  
 ![image](assets/img/RpgMaterial_Material.png)  
@@ -149,7 +149,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
 + MaterialValidStamp
   An abstract class that implements IMaterialValid, implements some functions, and subclasses can override the behavior.   
 
-#### 8.1.3 User module design description
+#### <span id="8.1.3">8.1.3 User module design description
 + Provides normal user data functions.
 + Provides user data function with unique Id.
 + Provides functionality for managing user data collections.  
@@ -227,8 +227,8 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
 + UserMaterialSet
    The abstract class that implements IUserMaterialSet, implements some functions, and subclasses can override the behavior.  
 
-#### 8.1.4 Service Module Design Instructions
-+ The design of material Service extends the function of [Service Framework](Manual_7.Service_en.md).
+#### <span id="8.1.4">8.1.4 Service Module Design Instructions
++ The design of material Service extends the function of [Service Framework](Manual_7.Service_en.html#7.4).
 + The classification of the material Service should correspond to the type (referring to the type in the configuration data) one-to-one, that is, a type creates a Service.
 + Provides the basic interface definition of Material Service.
 + Provides basic interface definitions for displayable materials, actionable materials, and valuable materials.
@@ -256,7 +256,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
 + ServiceUtil
   Provide some basic logic functions related to service.  
 
-#### 8.1.5 Asset Module Design Instructions
+#### <span id="8.1.5">8.1.5 Asset Module Design Instructions
 ![image](assets/img/RpgMaterial_Asset.png)   
 + MaterialAssetData
   Serialized structure of material user data, used in Unity panels.  
@@ -267,13 +267,13 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
 + MaterialAssetValidData1
   Serialized structure of material user data (with acquisition timestamp) with unique Id for Unity panels.  
 
-### 8.2 Use
+### <span id="8.2">8.2 Use
 Depends on the service framework (JLGames.RabbitDriver.Games.Service), and the specific usage process is consistent with the general service.  
 
-#### 8.2.1 Classification of material data
+#### <span id="8.2.1">8.2.1 Classification of material data
 Classify material configuration table data according to business needs  
 
-#### 8.2.2 Prepare the interface
+#### <span id="8.2.2">8.2.2 Prepare the interface
 Create a service interface for each type of material, at least inherit IInitService, IInitDataService, IMaterialService  
 + IInitService
   Used to initialize material configuration data  
@@ -286,17 +286,17 @@ Create a service interface for each type of material, at least inherit IInitServ
 + IMaterialService
   Provides some material-related properties and functions.  
 
-#### 8.2.3 Implementing the interface
+#### <span id="8.2.3">8.2.3 Implementing the interface
 Implement the interface created in the previous step.  
 
-#### 8.2.4 Configure and initialize according to the service framework process
-According to the [Service Framework Description] (Manual_7.Service_en.html#7.4), register, initialize, and call.  
+#### <span id="8.2.4">8.2.4 Configure and initialize according to the service framework process
+According to the [Service Framework Description](Manual_7.Service_en.html#7.4), register, initialize, and call.  
 
-#### 8.2.5 Other functions
+#### <span id="8.2.5">8.2.5 Other functions
 + By default, an event is thrown when the user data changes. Perform logic processing after data change by listening to corresponding events.
 + Supports trigger function by default, and supports trigger execution when user data changes.
 
-### 8.3 Example
+### <span id="8.3">8.3 Example
 Assets/JLGames/RabbitDriverPro/Samples/RpgMaterial  
 ![image](assets/img/RpgMaterial_1.jpg)  
 + Example Explanation

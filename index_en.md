@@ -14,7 +14,7 @@ Beta version: [Download](downloads/RabbitDriver Pro - Beta.unitypackage)
 
 For other questions,, please contact **xuzhuoxi@gmail.com** or **mailxuzhuoxi@163.com**  
 
-[Learn more](home/Home_README_en.html)  
+[Learn more](pages/Home_README_en.html)  
 
 ## What is RabbitDriver Pro？
 RabbitDriver Pro is a powerful game development framework under the Unity engine. Others include a lot of functional support that must be used in the game development process, such as "event management", "asset loading management", "internationalization support" and so on.  

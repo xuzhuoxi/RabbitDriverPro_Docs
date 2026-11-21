@@ -1,9 +1,9 @@
-## 7. Service Framework (Service)
+## <span id="7">7. Service Framework (Service)
 + **JLGames.Infra.Service** provides the service framework base types. The sample `SampleServiceBase` extends `ServiceBase`.
 + **JLGames.RabbitDriver.Actions.Service** provides the serializable service nodes `ServiceNodeGroup` and `ServiceNodeData`.
 + **JLGames.RabbitDriver.Games.Service** provides shared services such as preload and config data.
 
-### 7.1 Design Purpose
+### <span id="7.1">7.1 Design Purpose
 Game projects have some obvious characteristics: high degree of data coupling and strong system dependence.  
 So the entire game project can easily evolve into a **monolithic software**.  
 As there are more modules in the system, the monolithic architecture becomes more complex. In addition, the interleaving of new functions and modification of old functions affects each other and is ultimately difficult to manage.  
@@ -15,7 +15,7 @@ In order to solve or reduce the impact of the above problems, combined with the 
 + Extended support for normalized business modules
 + Unify the specification of cross-business behavior calls
 
-### 7.2 Design Ideas
+### <span id="7.2">7.2 Design Ideas
 + How to divide the service and how to grasp the granularity
   1. All businesses in the range from "game login complete" to "game logout start" are regarded as service division objects.
   2. Divide service units on a regular basis. The division rules are as follows:
@@ -28,9 +28,9 @@ In order to solve or reduce the impact of the above problems, combined with the 
 + According to the design idea of ​​the game engine, an interface function called at a fixed timing is added to the extended business service, which is used for initializing data, releasing data or special logic implementation inside the service.
 + All extension services are managed by the framework, which is convenient for unified processing of initialization, update and release.
 
-### 7.3 Interface description
+### <span id="7.3">7.3 Interface description
 
-#### 7.3.1 Service Basics
+#### <span id="7.3.1">7.3.1 Service Basics
 + **IService**
   Only the class that implements the IService interface can be identified as a service and added to the framework management.  
   The ServiceName property returns the service name, which is required to be **unique**.  
@@ -44,7 +44,7 @@ In order to solve or reduce the impact of the above problems, combined with the 
   The service instance requires the attribute functions of **total progress** and **current progress**.  
   ![image](assets/img/service_4.png)  
 
-#### 7.3.2 Service initialization related
+#### <span id="7.3.2">7.3.2 Service initialization related
 Execution timing: IArgumentService -> IAWakableService -> IInitService  
 + **IArgumentService**
   Provides a service interface for parameter injection  
@@ -63,7 +63,7 @@ Execution timing: IArgumentService -> IAWakableService -> IInitService
   When the service instance throws the **ServiceEvents.OnServiceDataInited** event, it means the **data initialization** process ends.  
   ![image](assets/img/service_4.png)  
 
-#### 7.3.3 Management scheduling related
+#### <span id="7.3.3">7.3.3 Management scheduling related
 + **IClearService**
   A service interface that provides **cleanup** logic.  
   Mostly used for data reset, event removal and other logic.  
@@ -78,7 +78,7 @@ Execution timing: IArgumentService -> IAWakableService -> IInitService
   When the service instance throws the **ServiceEvents.OnServiceSaved** event, it means the **data saving** process ends.  
   ![image](assets/img/service_7.png)  
 
-#### 7.3.4 Event Description
+#### <span id="7.3.4">7.3.4 Event Description
 
 ##### 7.3.4.1 Progress update related events
 ![image](assets/img/service_8.png)  
@@ -158,7 +158,7 @@ Dispatching order: OnServiceInitStart > OnServiceInited > OnServiceAllInited > O
 ### <span id="7.4">7.4 How to use the framework
 Before getting the service to use, it must be registered to the framework management, and then can be used after initialization. This is to ensure that the data has been processed completely.  
 
-#### 7.4.1 Register the service to the framework management
+#### <span id="7.4.1">7.4.1 Register the service to the framework management
 By calling the AddConfig function in the ServiceConfig instance, the service can be registered with the framework management.  
 `ServiceConfig.Shared.AddConfig(new ServiceInfo(serviceName, serviceImpl, args));`
 ![image](assets/img/service_14.png)  
@@ -166,12 +166,12 @@ By calling the AddConfig function in the ServiceConfig instance, the service can
 1. Manage the registration logic with a class dedicated to handling registration services. Such as ServiceRegister in the example.
 2. Registration logic calls should be guaranteed to be unique.
 
-#### 7.4.2 Service initialization
+#### <span id="7.4.2">7.4.2 Service initialization
 Start initialization by calling the **StartInitalization** function in the **ServiceManager** instance.  
 **Note**: It should not be called repeatedly after initialization has started.  
 ![image](assets/img/service_15.png)  
 
-#### 7.4.3 Service call
+#### <span id="7.4.3">7.4.3 Service call
 After the initial completion of all services, the service instance can be obtained by calling the **GetService** function in **ServiceConfig**.  
 There are multiple functions for obtaining service instances in ServiceConfig, but the GetService function is ultimately called.  
 ![image](assets/img/service_16.png)  
@@ -179,7 +179,7 @@ There are multiple functions for obtaining service instances in ServiceConfig, b
 
 1. Manage the acquisition logic using a class that specifically manages acquiring service instances. Such as ServiceCenter in the example.
 
-#### 7.4.4 Service cleanup
+#### <span id="7.4.4">7.4.4 Service cleanup
 When the game is to achieve a soft restart, it is necessary to reset all services and then reinitialize.  
 All services can be reset by calling **ClearServices** in **ServiceManager**.  
 Only services that implement the IClearService interface will perform reset logic.  
@@ -190,7 +190,7 @@ Only services that implement the IClearService interface will perform reset logi
 1. Each service is recommended to implement the IClearService interface.
 2. In the Clear function in the IClearService interface, also clear all event listeners.
 
-### 7.5 Example
+### <span id="7.5">7.5 Example
 Assets/JLGames/RabbitDriverPro/Samples/Service  
 ![image](assets/img/service_18.png)  
 ![image](assets/img/service_19.png)  

@@ -14,7 +14,7 @@ Beta体验版本：[下载](downloads/RabbitDriver Pro - Beta.unitypackage)
 
 如有其它问题，请联系 **xuzhuoxi@gmail.com** 或 **mailxuzhuoxi@163.com**。  
 
-[了解更多](home/Home_README_cn.html)  
+[了解更多](pages/Home_README_cn.html)  
 
 ## RabbitDriver Pro 是什么？
 RabbitDriver Pro 是Unity引擎下的一个功能强大的游戏开发框架。其它包含相当多的在游戏开发过程中必须使用到的功能支持，如 "事件管理"、 "资源加载管理"、"国际化支持"等等。  

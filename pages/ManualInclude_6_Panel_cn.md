@@ -1,12 +1,12 @@
-## 6. 面板管理模块(PanelManager)
+## <span id="6">6. 面板管理模块(PanelManager)
 + **JLGames.RabbitDriver.Actions.Layer** 提供了容器层级管理功能。
 + **JLGames.RabbitDriver.Games.PanelManager** 提供了面板管理功能。
 + 面板管理模块的使用流程： 注册 -> 展示 -> 关闭
 + 若要缓存面板不销毁，建议把面板移出屏幕外。 
 
-### 6.1 注册信息
+### <span id="6.1">6.1 注册信息
 
-#### 6.1.1 注册层容器信息
+#### <span id="6.1.1">6.1.1 注册层容器信息
 ```C#
 PanelManagerShared.Manager.Register.RegisterLayer(containerName, 
   tranContainer, isDefault);
@@ -16,7 +16,7 @@ PanelManagerShared.Manager.Register.RegisterLayer(containerName,
 + layer: 层的Transform组件引用.
 + default: 是否设置为默认，如果为true，当打开面板时不指定层名称，则选择默认层。
 
-#### 6.1.2 注册背景处理信息
+#### <span id="6.1.2">6.1.2 注册背景处理信息
 ```C#
 PanelManagerShared.Manager.Register.RegisterBackground(backgroundKey, 
   backgroundOrigin, backgroundScript);
@@ -26,7 +26,7 @@ PanelManagerShared.Manager.Register.RegisterBackground(backgroundKey,
 + origin: 背景的预制件, 当展示面板时, 克隆预制件添加到面板容器的最底层。
 + script: 处理背景逻辑的脚本组件的类名(包含命名空间)。
 
-#### 6.1.3 注册动画信息
+#### <span id="6.1.3">6.1.3 注册动画信息
 ```C#
 PanelManagerShared.Manager.Register.RegisterAnimator(animKey, animAnimator);
 ```
@@ -34,14 +34,14 @@ PanelManagerShared.Manager.Register.RegisterAnimator(animKey, animAnimator);
 + key: 为注册的动画信息指定一个Key， 用于标识信息的唯一性。
 + animator: 动画RuntimeAnimatorController组件。
 
-#### 6.1.4 设置面板的基础容器
+#### <span id="6.1.4">6.1.4 设置面板的基础容器
 ```C#
 PanelManagerShared.Manager.Register.RegisterPanelContainer(container);
 ```
 ![image](assets/img/panel_6.png)  
 + container: 面板容器的预制件，当展示面板时, 克隆预制件作为面板根节点添加到展示层中, 面板的实际内容任务子节点添加到面板容器中。
 
-#### 6.1.5 注册面板信息
+#### <span id="6.1.5">6.1.5 注册面板信息
 ```C#
 PanelManagerShared.Manager.Register.RegisterPanelInfo(panelId,
   settings, maxDisplayNum, extendType);
@@ -50,51 +50,51 @@ PanelManagerShared.Manager.Register.RegisterPanelInfo(panelId,
 + 面板信息最终以IPanelInfo的实例保存起来用于查找与展示。
 + 项目使用时，应该读取项目面板的配置信息，并注册进来。
 
-#### 6.1.6 使用PanelManagerRegister组件，可以同时处理层容器、背景、动画以及面板信息的注册功能
+#### <span id="6.1.6">6.1.6 使用PanelManagerRegister组件，可以同时处理层容器、背景、动画以及面板信息的注册功能
 ![image](assets/img/panel_1.png)  
 
-#### 6.1.7 注意
+#### <span id="6.1.7">6.1.7 注意
 **背景注册** 和 **动画注册** **非必要**，当面板信息中有关联要求时才注册。  
 
-### 6.2 展示面板
+### <span id="6.2">6.2 展示面板
 
-#### 6.2.1 通过面板id弹出面板, 可选择指定面板层容器。
+#### <span id="6.2.1">6.2.1 通过面板id弹出面板, 可选择指定面板层容器。
 ```C#
 PanelManagerShared.Manager.ShowPanel(panelId);
 ```
 ![image](assets/img/panel_8.png)  
 
-#### 6.2.2 通过面板id弹出面板, 并传入参数对象, 可选择指定面板层容器。
+#### <span id="6.2.2">6.2.2 通过面板id弹出面板, 并传入参数对象, 可选择指定面板层容器。
 ```C#
 PanelManagerShared.Manager.ShowPanel(panelId, panelParams);
 ```
 ![image](assets/img/panel_16.png)  
 
-### 6.3 关闭面板
+### <span id="6.3">6.3 关闭面板
 
-#### 6.3.1 通过面板id关闭面板。 
+#### <span id="6.3.1">6.3.1 通过面板id关闭面板。 
 可通过面板id，选择关闭默认的、关闭最先展示的、关闭最后展示的：  
 ![image](assets/img/panel_21.png)   
 
-#### 6.3.2 通过实例信息关闭面板。
+#### <span id="6.3.2">6.3.2 通过实例信息关闭面板。
 通过提供面板实例Id(instanceId)、显示视图(view)、面板实例(IPanelInstance)，精确关闭面板。  
 ![image](assets/img/panel_22.png)   
 
-#### 6.3.3 批量关闭面板。
+#### <span id="6.3.3">6.3.3 批量关闭面板。
 可选择关闭全部展示中的面板、关闭指定面板id的全部面板、关闭符合匹配函数的面板。  
 ![image](assets/img/panel_23.png)   
 
-### 6.4 高级应用
+### <span id="6.4">6.4 高级应用
 
-#### 6.4.1 自定义注册器
+#### <span id="6.4.1">6.4.1 自定义注册器
 IPanelManager中的注册器可自定义，只要实现IPanelRegiester接口即可。  
 ![image](assets/img/panel_13.png)  
 
-#### 6.4.2 自定义加载器
+#### <span id="6.4.2">6.4.2 自定义加载器
 IPanelManager中的加载器可自定义，只要实现IIPanelLoaderAdapter接口即可。  
 ![image](assets/img/panel_14.png)  
 
-#### 6.4.3 设置面板展示时机
+#### <span id="6.4.3">6.4.3 设置面板展示时机
 IPanelManger中的SetShowMoment可以设置面板展示时机(立即展示|帧结束展示)  
 ![image](assets/img/panel_15.png)  
 + 立即展示
@@ -102,7 +102,7 @@ IPanelManger中的SetShowMoment可以设置面板展示时机(立即展示|帧�
 + 帧结束展示
   代码执行时，马上进行加载处理。当资源准备完成后，开启协程，等待WaitForEndOfFrame后添加面板到显示节点。  
 
-#### 6.4.4 IPanelSettings说明
+#### <span id="6.4.4">6.4.4 IPanelSettings说明
 IPanelSettings实例为面板注册时保存的面板配置信息接口，包含资源配置、背景配置和动画配置。  
 
 ##### 6.4.4.1 资源配置
@@ -165,7 +165,7 @@ IPanelAnimSettings实例
 + CloseState
   动画Animator中的状态名称，用于播放指定动画  
 
-#### 6.4.5 面板功能扩展
+#### <span id="6.4.5">6.4.5 面板功能扩展
 现阶段有4个接口与面板功能扩展相关：  
 IInitPanel、IParamsPanel、IRefreshPanel、IDisposePanel  
 **注意**：IShowPanel、IClosePanel已**弃用**。  
@@ -190,6 +190,6 @@ IInitPanel、IParamsPanel、IRefreshPanel、IDisposePanel
   当面板即将被销毁前调用，用于执行释放行为。  
   ![image](assets/img/panel_12.png)  
 
-### 6.5 示例
+### <span id="6.5">6.5 示例
 Assets/JLGames/RabbitDriverPro/Samples/Panel  
 ![image](assets/img/panel_20.png)  

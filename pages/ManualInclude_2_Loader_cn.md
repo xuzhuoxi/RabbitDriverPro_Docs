@@ -1,17 +1,17 @@
-## 2. 加载管理模块(Loader) - 支持Resources、Editor、Assetbundle三种模式自由切换
+## <span id="2">2. 加载管理模块(Loader) - 支持Resources、Editor、Assetbundle三种模式自由切换
 
 + **JLGames.RabbitDriver.Actions.Loaderx** 提供了加载器全部的功能支持。
 + **“Tools/RabbitDriverPro/Project/Gen LoaderSettings”**提供了加载器配置文件的生成入口。
 
-### 2.1 初始化
+### <span id="2.1">2.1 初始化
 
-#### 2.1.1 生成配置资产
+#### <span id="2.1.1">2.1.1 生成配置资产
 执行菜单 “Tools/RabbitDriverPro/Project/Gen LoaderSettings”。  
 在项目Assets/Resources下会生成 LoaderSettings.asset(可重命名) 文件。  
 ![image](assets/img/loader_1.png)  
 ![image](assets/img/loader_2.png)  
 
-#### 2.1.2  按项目需求设置配置
+#### <span id="2.1.2">2.1.2  按项目需求设置配置
 LoaderSettings中共有5个可用配置，一个Editor模式， 两个Resource模式， 两个AssetBundle模式。  
 
 + Editor配置
@@ -52,7 +52,7 @@ LoaderSettings中共有5个可用配置，一个Editor模式， 两个Resource�
     + Counter为计数释放策略， 当bundle加载资源到达设定值及倍数值时调用gc. 
       ![image](assets/img/loader_11.png)   
 
-#### 2.1.3 使用配置初始化加载器
+#### <span id="2.1.3">2.1.3 使用配置初始化加载器
 使用以下API初始化加载器：  
 + 使用由[第一点]()生成的配置文件名称进行初始化。
 ![image](assets/img/loader_16.png)  
@@ -61,7 +61,7 @@ LoaderSettings中共有5个可用配置，一个Editor模式， 两个Resource�
 + 使用Loader静态类中有快捷初始化函数：
 ![image](assets/img/loader_18.png)  
 
-#### 2.1.4 初始化Bundle版本信息
+#### <span id="2.1.4">2.1.4 初始化Bundle版本信息
 调用加载器实例中函数：  
 ![image](assets/img/loader_19.png)  
 
@@ -69,9 +69,9 @@ LoaderSettings中共有5个可用配置，一个Editor模式， 两个Resource�
 + 函数要求开启协程调用, 可以使用LoaderManager.Mono开启协程：
 ![image](assets/img/loader_20.png)  
 
-### 2.2 使用
+### <span id="2.2">2.2 使用
 
-#### 2.2.1 加载Bundle资产
+#### <span id="2.2.1">2.2.1 加载Bundle资产
 在Bundle版本信息初始化完成后，才可以加载Bundle资产。  
 加载器实现了IBundleLoader接口, 包含的函数与加载Bundle资产相关。  
 加载Bundle资产要求使用协程，可以使用LoaderManager.Mono实例启用协程加载Bundle.  
@@ -83,7 +83,7 @@ LoaderSettings中共有5个可用配置，一个Editor模式， 两个Resource�
 + unloadAllLoadedObjects: 指明在onBundleLoaded执行结束后是否释放从bundle实例中实例化的资源资产
 + 如果autoRelease为true, 在onoBundleLoaded中应该实例化全部要使用的资源资产。
 
-#### 2.2.2 加载资源资产
+#### <span id="2.2.2">2.2.2 加载资源资产
 在获得bundle实例的情况下， 可以从bundle实例中实例化出资源资产的实例， 然后再克隆使用。  
 加载资源资产建议使用同步函数，不建议使用异步。 原因是Unity对于在协程内部开启协程支持得不友好， 层级过多(好像是16层)会出现无法预测的报错。  
 
@@ -98,6 +98,6 @@ IAssetLoader接口函数分四类：
     ![image](assets/img/loader_15.png)   
   + 更多用法请参考示例、API或源码。   
 
-### 2.3 示例
+### <span id="2.3">2.3 示例
 Assets/JLGames/RabbitDriverPro/Samples/Loader  
 ![image](assets/img/loader_8.png)  

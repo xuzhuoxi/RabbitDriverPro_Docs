@@ -1,4 +1,4 @@
-## 8. Rpg材料数据系统
+## <span id="8">8. Rpg材料数据系统
 这是一套通用的游戏数据管理系统。  
 针对玩家的数值型数据，以KTV(Key-Type-Value)形式进行管理。  
 
@@ -16,7 +16,7 @@
   + **JLGames.RabbitDriver.Games.RpgMaterial.Asset**
   系统中针对Unity进行序列化的数据结构。  
 
-### 8.1 设计思路
+### <span id="8.1">8.1 设计思路
 + 用户数据的元数据(配置数据)以 **KTD(Key-Type-Define)** 格式进行管理。
 + 元数据(配置数据)的来源可以是数值表导出、服务器获取、资产配置等方式得到。
 + 通过 **KT(Key&Type)** 能得到元数据(配置数据)定义(Define)，并且可以在用户数据设置时进行有效性检查。
@@ -26,7 +26,7 @@
 + 通过 **KT(Key&Type)** 或 **KTU(Key&Type&UId)** 能得到玩家的具体数据(Value)，用于运算与展示。
 + 用户数据的变更以通知的形式下发，支持增量变更与直接更新两种。
 
-#### 8.1.1 Common模块设计说明
+#### <span id="8.1.1">8.1.1 Common模块设计说明
 + 提供数据对象的基础管理功能，并定义了数据对象的最基础的接口.
 + 提供最基础的配置数据接口定义和相关的数据结构实现。
 + 提供最基础的用户数据接口定义和相关的数据结构实现。
@@ -114,7 +114,7 @@
 + DataRandomUtils
   针对IDataRandomable接口实现类的随机逻辑  
 
-#### 8.1.2 Material模块设计说明
+#### <span id="8.1.2">8.1.2 Material模块设计说明
 + 提供配置数据的常用接口定义和相关实现。
 + 使用Common中的接口和数据结构进行组合使用。  
 ![image](assets/img/RpgMaterial_Material.png)  
@@ -150,7 +150,7 @@
 + MaterialValidStamp
   实现 IMaterialValid 的抽象类，实现时效处理部分功能，子类可重写行为。  
 
-#### 8.1.3 User模块设计说明
+#### <span id="8.1.3">8.1.3 User模块设计说明
 + 提供了普通用户数据功能。
 + 提供了带唯一Id的用户数据功能。
 + 提供了用于管理用户数据集合功能。  
@@ -228,8 +228,8 @@
 + UserMaterialSet
    实现 IUserMaterialSet 的抽象类，实现部分功能，子类可重写行为。  
 
-#### 8.1.4 Service模块设计说明
-+ 材料 Service 的设计扩展了[服务框架](Manual_7.Service_cn.md)功能。
+#### <span id="8.1.4">8.1.4 Service模块设计说明
++ 材料 Service 的设计扩展了[服务框架](Manual_7.Service_cn.html#7.4)功能。
 + 材料 Service 的分类应该与类型(指配置数据中的类型)一一对应，也就是一种类型创建一个Service。
 + 提供了材料 Service 的基本接口定义。
 + 提供了可显示材料、可操作材料、有价值材料的基本接口定义。
@@ -257,7 +257,7 @@
 + ServiceUtil
   提供一些与 service 相关的基础逻辑函数。  
 
-#### 8.1.5 Asset模块设计说明
+#### <span id="8.1.5">8.1.5 Asset模块设计说明
 ![image](assets/img/RpgMaterial_Asset.png)   
 + MaterialAssetData
   材料用户数据的序列化结构，用于Unity面板。  
@@ -268,13 +268,13 @@
 + MaterialAssetValidData1
   带唯一Id的材料用户数据(带获得时间戳)的序列化结构，用于Unity面板。  
 
-### 8.2 使用
+### <span id="8.2">8.2 使用
 依赖于服务框架(JLGames.RabbitDriver.Games.Service)，具体使用流程与一般服务一致。  
 
-#### 8.2.1 材料数据分类
+#### <span id="8.2.1">8.2.1 材料数据分类
 按照业务需求，把材料配置表数据进行分类  
 
-#### 8.2.2 准备接口
+#### <span id="8.2.2">8.2.2 准备接口
 每类材料创建一个服务接口，至少继承 IInitService、IInitDataService、IMaterialService  
 + IInitService
   用于初始化材料配置数据  
@@ -287,17 +287,17 @@
 + IMaterialService
   提供一些材料相关的属性与功能。  
 
-#### 8.2.3 实现接口
+#### <span id="8.2.3">8.2.3 实现接口
 实现上一步创建的接口。  
 
-#### 8.2.4 按照服务框架流程进行配置和初始化
+#### <span id="8.2.4">8.2.4 按照服务框架流程进行配置和初始化
 按照[服务框架说明](Manual_7.Service_cn.html#7.4)，注册、初始化、调用。  
 
-#### 8.2.5 其它功能  
+#### <span id="8.2.5">8.2.5 其它功能  
 + 默认已经实现用户数据变更时抛出事件。通过监听相应事件进行数据变更后逻辑处理。  
 + 默认支持触发器功能，支持用户数据变更时触执行。  
 
-### 8.3 示例
+### <span id="8.3">8.3 示例
 Assets/JLGames/RabbitDriverPro/Samples/RpgMaterial   
 ![image](assets/img/RpgMaterial_1.jpg)   
 + 示例说明  
