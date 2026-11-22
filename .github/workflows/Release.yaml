@@ -1,5 +1,5 @@
 # 手动运行，或推送 v*.*.* tag 时：
-# 1. 用本机地址打开 _site 里已有的两份全量手册，不访问 www.xuzhuoxi.com。页面不存在则失败，不重新构建站点。
+# 1. 按当前仓库拼出 GitHub Pages 地址，打开 pages/Manual_Full_cn.html 与 pages/Manual_Full_en.html。打不开则失败。
 # 2. 等两页都加载完后打印为 PDF。
 # 3. 打印为 A4、每张纸 1 页、边距与缩放用 Chrome 默认值，并保留页眉页脚。
 # 4. 把两个 PDF 放到该 tag 的 GitHub Release Assets 中。
@@ -74,20 +74,24 @@ jobs:
           echo "TAG_NAME=${tag}" >> "$GITHUB_ENV"
           echo "TAG_SHA=${sha}" >> "$GITHUB_ENV"
 
-      # 使用已有的 _site，不运行 BuildTest，也不执行 jekyll build。
-      - name: Check manual pages
+      # 当前仓库 xuzhuoxi/RabbitDriverPro_Docs 对应
+      # https://xuzhuoxi.github.io/RabbitDriverPro_Docs/pages/Manual_Full_cn.html
+      - name: Check GitHub Pages manuals
         run: |
           set -euo pipefail
-          missing=0
-          for page in _site/pages/Manual_Full_cn.html _site/pages/Manual_Full_en.html; do
-            if [[ ! -f "${page}" ]]; then
-              echo "::error::缺少 ${page}，Release 不会重新构建站点。"
-              missing=1
+          owner="${GITHUB_REPOSITORY%%/*}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          pages_origin="https://${owner}.github.io/${repo}"
+          echo "PAGES_ORIGIN=${pages_origin}" >> "$GITHUB_ENV"
+          for path in pages/Manual_Full_cn.html pages/Manual_Full_en.html; do
+            url="${pages_origin}/${path}"
+            code="$(curl -sS -o /dev/null -w "%{http_code}" -L --max-redirs 5 "${url}")"
+            if [[ "${code}" != "200" ]]; then
+              echo "::error::打不开 ${url}（HTTP ${code}）。"
+              exit 1
             fi
+            echo "可访问：${url}"
           done
-          if [[ "${missing}" -ne 0 ]]; then
-            exit 1
-          fi
 
       - uses: actions/setup-node@v4
         with:
@@ -95,33 +99,12 @@ jobs:
       - name: Print manuals to PDF
         run: |
           set -euo pipefail
-          python3 -m http.server 4173 --directory _site >/tmp/site-server.log 2>&1 &
-          echo $! > /tmp/site-server.pid
-          cleanup() { kill "$(cat /tmp/site-server.pid)" >/dev/null 2>&1 || true; }
-          trap cleanup EXIT
-
-          ready=0
-          for _ in $(seq 1 30); do
-            if curl -fsS -o /dev/null "http://127.0.0.1:4173/pages/Manual_Full_cn.html" \
-              && curl -fsS -o /dev/null "http://127.0.0.1:4173/pages/Manual_Full_en.html"; then
-              ready=1
-              break
-            fi
-            sleep 1
-          done
-          if [[ "${ready}" -ne 1 ]]; then
-            echo "::error::本地站点没有在 30 秒内提供两份手册页面。"
-            cat /tmp/site-server.log
-            exit 1
-          fi
-
           print_dir="${RUNNER_TEMP}/print-manuals"
           mkdir -p "${print_dir}"
           npm init -y --prefix "${print_dir}"
           npm install --prefix "${print_dir}" puppeteer@24
           cp .github/scripts/print-manuals.mjs "${print_dir}/print-manuals.mjs"
-          # 只打开本机 _site。页面或资源若指向 www.xuzhuoxi.com，由打印脚本改写到这个地址。
-          SITE_ORIGIN=http://127.0.0.1:4173 \
+          SITE_ORIGIN="${PAGES_ORIGIN}" \
             PDF_DIR="${GITHUB_WORKSPACE}/downloads" \
             node "${print_dir}/print-manuals.mjs"
 

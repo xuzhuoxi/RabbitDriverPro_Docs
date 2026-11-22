@@ -1,5 +1,5 @@
-// 打开本机 _site 里已有的两份全量手册，等两页都加载完再打印。
-// 不通过 www.xuzhuoxi.com 打开页面；HTML 里指向该域名的资源改写到本机站点。
+// 打开当前仓库 GitHub Pages 上的两份全量手册，等两页都加载完再打印。
+// 站点根由仓库名拼出，页面路径是 pages/Manual_Full_*.html。
 // 打印设置对齐 Chrome 打印对话框：A4、每张纸 1 页、边距默认（1cm）、缩放默认（1）、保留页眉页脚。
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
@@ -12,34 +12,16 @@ if (!origin || !pdfDir) {
   process.exit(1);
 }
 
-const localOrigin = new URL(origin);
-if (localOrigin.hostname === 'www.xuzhuoxi.com' || localOrigin.hostname === 'xuzhuoxi.com') {
-  console.error(`SITE_ORIGIN 不能是 ${origin}`);
-  process.exit(1);
-}
-
-function toLocalUrl(rawUrl) {
-  const target = new URL(rawUrl);
-  if (target.hostname !== 'www.xuzhuoxi.com' && target.hostname !== 'xuzhuoxi.com') {
-    return null;
-  }
-  let pathname = target.pathname;
-  const prefix = '/RabbitDriverPro_Docs';
-  if (pathname === prefix || pathname.startsWith(`${prefix}/`)) {
-    pathname = pathname.slice(prefix.length) || '/';
-  }
-  return new URL(`${pathname}${target.search}`, localOrigin).href;
-}
-
+const pagesRoot = origin.endsWith('/') ? origin : `${origin}/`;
 const jobs = [
   {
     name: '中文手册',
-    url: new URL('/pages/Manual_Full_cn.html', origin).href,
+    url: new URL('pages/Manual_Full_cn.html', pagesRoot).href,
     file: path.join(pdfDir, 'RabbitDriverPro-Manual_cn.pdf'),
   },
   {
     name: '英文手册',
-    url: new URL('/pages/Manual_Full_en.html', origin).href,
+    url: new URL('pages/Manual_Full_en.html', pagesRoot).href,
     file: path.join(pdfDir, 'RabbitDriverPro-Manual_en.pdf'),
   },
 ];
@@ -82,32 +64,14 @@ const browser = await puppeteer.launch({
 
 try {
   const loaded = await Promise.all(jobs.map(async (job) => {
-    const pageHost = new URL(job.url).hostname;
-    if (pageHost === 'www.xuzhuoxi.com' || pageHost === 'xuzhuoxi.com') {
-      throw new Error(`${job.name} 不能通过 ${job.url} 打开。`);
-    }
     const page = await browser.newPage();
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-      const localUrl = toLocalUrl(request.url());
-      if (!localUrl) {
-        request.continue();
-        return;
-      }
-      console.log(`改写 ${request.url()} -> ${localUrl}`);
-      request.continue({ url: localUrl });
-    });
     const response = await page.goto(job.url, { waitUntil: 'load', timeout: 180000 });
     const status = response ? response.status() : 0;
     if (!response || status >= 400) {
       throw new Error(`${job.name} 打开失败：${job.url}（HTTP ${status}）`);
     }
-    const finalHost = new URL(page.url()).hostname;
-    if (finalHost === 'www.xuzhuoxi.com' || finalHost === 'xuzhuoxi.com') {
-      throw new Error(`${job.name} 被重定向到 ${page.url()}`);
-    }
     await waitUntilFullyLoaded(page);
-    console.log(`已加载：${job.url}`);
+    console.log(`已加载：${page.url()}`);
     return { page, job };
   }));
 
