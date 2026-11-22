@@ -113,3 +113,8 @@ pre code {
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
+
+// 正文图片可点击，在新标签打开原图。页头 Logo 不在 section 内，不受影响。
+section a > img {
+  cursor: zoom-in;
+}
