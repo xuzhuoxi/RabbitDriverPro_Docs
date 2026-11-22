@@ -94,3 +94,10 @@ manual-nav {
 .text-lowercase      { text-transform: lowercase; }
 .text-uppercase      { text-transform: uppercase; }
 .text-capitalize     { text-transform: capitalize; }
+
+// 围栏代码块字号。本文件在 jekyll-theme-minimal.scss 之后引入，这里只覆盖 font-size。
+// pre 的内边距、背景、圆角、边框、横向滚动仍用主题里的 pre 规则。
+// 站点中只有围栏代码生成 pre；正文和行内 code 不在 pre 内，字号不变。
+pre {
+  font-size: 12px;
+}
