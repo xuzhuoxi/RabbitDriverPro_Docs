@@ -11,7 +11,20 @@
 PanelManagerShared.Manager.Register.RegisterLayer(containerName, 
   tranContainer, isDefault);
 ```
-![image](assets/img/panel_3.png)  
+`RegisterLayer` 声明在 `IPanelRegister` 中：  
+
+```csharp
+/// <summary>
+/// Register panel display layer.
+/// 注册面板显示层容器。
+/// </summary>
+/// <param name="layerName">Layer name<br/>层名称</param>
+/// <param name="layer">Layer transform<br/>层 Transform</param>
+/// <param name="default">Whether this is the default layer<br/>是否为默认层</param>
+void RegisterLayer(string layerName, Transform layer, bool @default = false);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Register/IPanelRegister.cs`。  
 + layerName: 为注册的层信息指定一个名称，与layer的name属性无关。
 + layer: 层的Transform组件引用.
 + default: 是否设置为默认，如果为true，当打开面板时不指定层名称，则选择默认层。
@@ -21,7 +34,20 @@ PanelManagerShared.Manager.Register.RegisterLayer(containerName,
 PanelManagerShared.Manager.Register.RegisterBackground(backgroundKey, 
   backgroundOrigin, backgroundScript);
 ```
-![image](assets/img/panel_4.png)  
+`RegisterBackground` 声明在 `IPanelRegister` 中：  
+
+```csharp
+/// <summary>
+/// Register background meta prefab.
+/// 注册背景元预制件。
+/// </summary>
+/// <param name="key">Background mapping key<br/>背景映射 Key</param>
+/// <param name="origin">Background prefab<br/>背景预制件</param>
+/// <param name="script">Background handler script name<br/>背景处理脚本名</param>
+void RegisterBackground(string key, GameObject origin, string script);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Register/IPanelRegister.cs`。  
 + key: 为注册的背景信息指定一个key， 用于标识信息的唯一性。
 + origin: 背景的预制件, 当展示面板时, 克隆预制件添加到面板容器的最底层。
 + script: 处理背景逻辑的脚本组件的类名(包含命名空间)。
@@ -30,7 +56,19 @@ PanelManagerShared.Manager.Register.RegisterBackground(backgroundKey,
 ```C#
 PanelManagerShared.Manager.Register.RegisterAnimator(animKey, animAnimator);
 ```
-![image](assets/img/panel_5.png)  
+`RegisterAnimator` 声明在 `IPanelRegister` 中：  
+
+```csharp
+/// <summary>
+/// Register a runtime animator controller.
+/// 注册运行时动画控制器。
+/// </summary>
+/// <param name="key">Animator mapping key<br/>动画映射 Key</param>
+/// <param name="animator">Animator controller<br/>动画控制器</param>
+void RegisterAnimator(string key, RuntimeAnimatorController animator);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Register/IPanelRegister.cs`。  
 + key: 为注册的动画信息指定一个Key， 用于标识信息的唯一性。
 + animator: 动画RuntimeAnimatorController组件。
 
@@ -38,7 +76,18 @@ PanelManagerShared.Manager.Register.RegisterAnimator(animKey, animAnimator);
 ```C#
 PanelManagerShared.Manager.Register.RegisterPanelContainer(container);
 ```
-![image](assets/img/panel_6.png)  
+`RegisterPanelContainer` 声明在 `IPanelRegister` 中：  
+
+```csharp
+/// <summary>
+/// Register panel instance meta container prefab.
+/// 注册面板实例元容器预制件。
+/// </summary>
+/// <param name="container">Container prefab<br/>容器预制件</param>
+void RegisterPanelContainer(GameObject container);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Register/IPanelRegister.cs`。  
 + container: 面板容器的预制件，当展示面板时, 克隆预制件作为面板根节点添加到展示层中, 面板的实际内容任务子节点添加到面板容器中。
 
 #### <span id="6.1.5">6.1.5 注册面板信息
@@ -46,7 +95,37 @@ PanelManagerShared.Manager.Register.RegisterPanelContainer(container);
 PanelManagerShared.Manager.Register.RegisterPanelInfo(panelId,
   settings, maxDisplayNum, extendType);
 ```
-![image](assets/img/panel_7.png)  
+`RegisterPanelInfo` 声明在 `IPanelRegister` 中：  
+
+```csharp
+/// <summary>
+/// Register panel info.
+/// 注册面板信息。
+/// </summary>
+/// <param name="info">Panel definition<br/>面板定义</param>
+void RegisterPanelInfo(IPanelInfo info);
+
+/// <summary>
+/// Register panel info with bundle and asset path.
+/// 使用 Bundle 与资源路径注册面板信息。
+/// </summary>
+/// <param name="id">Panel id<br/>面板 Id</param>
+/// <param name="bundleName">AssetBundle name<br/>AssetBundle 名称</param>
+/// <param name="assetPath">Asset path<br/>资源路径</param>
+void RegisterPanelInfo(string id, string bundleName, string assetPath);
+
+/// <summary>
+/// Register panel info with full settings.
+/// 使用完整配置注册面板信息。
+/// </summary>
+/// <param name="id">Panel id<br/>面板 Id</param>
+/// <param name="settings">Panel settings<br/>面板配置</param>
+/// <param name="maxDisplayNum">Max simultaneous display count<br/>最大同时显示数量</param>
+/// <param name="extendType">Business extend type<br/>业务扩展面板类型</param>
+void RegisterPanelInfo(string id, IPanelSettings settings, int maxDisplayNum, int extendType);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Register/IPanelRegister.cs`。  
 + 面板信息最终以IPanelInfo的实例保存起来用于查找与展示。
 + 项目使用时，应该读取项目面板的配置信息，并注册进来。
 
@@ -62,41 +141,169 @@ PanelManagerShared.Manager.Register.RegisterPanelInfo(panelId,
 ```C#
 PanelManagerShared.Manager.ShowPanel(panelId);
 ```
-![image](assets/img/panel_8.png)  
+`ShowPanel` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Show a panel.
+/// 打开面板
+/// </summary>
+/// <param name="panelId">Panel Id<br/>面板的配置Id</param>
+/// <param name="layerName">The container layer name corresponding to the panel to be displayed<br/>展示时指定的容器名称</param>
+/// <returns>Opened panel instance, or null if failed<br/>已打开的面板实例，失败时为 null</returns>
+IPanelInstance ShowPanel(string panelId, string layerName = null);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 
 #### <span id="6.2.2">6.2.2 通过面板id弹出面板, 并传入参数对象, 可选择指定面板层容器。
 ```C#
 PanelManagerShared.Manager.ShowPanel(panelId, panelParams);
 ```
-![image](assets/img/panel_16.png)  
+`ShowPanel` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Show a panel.
+/// 打开面板。
+/// </summary>
+/// <param name="panelId">Panel Id<br/>面板的配置 Id</param>
+/// <param name="params">Parameters injected into IParamsPanel<br/>展示时 IParamsPanel 注入的参数对象</param>
+/// <param name="layerName">The container layer name corresponding to the panel to be displayed<br/>展示时指定的容器名称</param>
+/// <returns>Opened panel instance, or null if failed<br/>已打开的面板实例，失败时为 null</returns>
+IPanelInstance ShowPanel(string panelId, object @params, string layerName = null);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 
 ### <span id="6.3">6.3 关闭面板
 
 #### <span id="6.3.1">6.3.1 通过面板id关闭面板。 
-可通过面板id，选择关闭默认的、关闭最先展示的、关闭最后展示的：  
-![image](assets/img/panel_21.png)   
+可通过面板id，选择关闭默认的、关闭最先展示的、关闭最后展示的。声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Close panel by panel id
+/// 关闭面板
+/// </summary>
+/// <param name="panelId">Panel configuration id<br/>面板的配置 Id</param>
+void ClosePanel(string panelId);
+
+/// <summary>
+/// Close the first opened panel by panel id.
+/// 按面板 Id 关闭最先打开的面板。
+/// </summary>
+/// <param name="panelId">Panel configuration id<br/>面板的配置 Id</param>
+void CloseFirstPanel(string panelId);
+
+/// <summary>
+/// Close the last opened panel by panel id.
+/// 按面板 Id 关闭最后打开的面板。
+/// </summary>
+/// <param name="panelId">Panel configuration id<br/>面板的配置 Id</param>
+void CloseLastPanel(string panelId);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。   
 
 #### <span id="6.3.2">6.3.2 通过实例信息关闭面板。
-通过提供面板实例Id(instanceId)、显示视图(view)、面板实例(IPanelInstance)，精确关闭面板。  
-![image](assets/img/panel_22.png)   
+通过提供面板实例Id(instanceId)、显示视图(view)、面板实例(IPanelInstance)，精确关闭面板。`CloseInstacnePanel` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Close the panel by instance id.
+/// 按实例 Id 关闭面板。
+/// </summary>
+/// <param name="instanceId">Panel instance id<br/>面板的实例 Id</param>
+void CloseInstacnePanel(string instanceId);
+
+/// <summary>
+/// Close the panel by view instance.
+/// 按显示视图关闭面板。
+/// </summary>
+/// <param name="view">Panel display view<br/>面板显示视图</param>
+void CloseInstacnePanel(GameObject view);
+
+/// <summary>
+/// Close the panel by instance.
+/// 按实例对象关闭面板。
+/// </summary>
+/// <param name="instance">Panel instance<br/>面板的实例对象</param>
+void CloseInstacnePanel(IPanelInstance instance);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 
 #### <span id="6.3.3">6.3.3 批量关闭面板。
-可选择关闭全部展示中的面板、关闭指定面板id的全部面板、关闭符合匹配函数的面板。  
-![image](assets/img/panel_23.png)   
+可选择关闭全部展示中的面板、关闭指定面板id的全部面板、关闭符合匹配函数的面板。`ClosePanels` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Close all displayed panels
+/// 关闭全部显示的面板
+/// </summary>
+void ClosePanels();
+
+/// <summary>
+/// Close all displayed panels by panel id.
+/// 按面板 Id 关闭所有已显示的面板。
+/// </summary>
+/// <param name="panelId">Panel configuration id<br/>面板的配置 Id</param>
+void ClosePanels(string panelId);
+
+/// <summary>
+/// Close displayed panels that match the predicate.
+/// 关闭满足条件的所有已显示面板。
+/// </summary>
+/// <param name="match">Predicate to match panel instances<br/>用于匹配面板实例的谓词</param>
+void ClosePanels(Predicate<IPanelInstance> match);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 
 ### <span id="6.4">6.4 高级应用
 
 #### <span id="6.4.1">6.4.1 自定义注册器
-IPanelManager中的注册器可自定义，只要实现IPanelRegiester接口即可。  
-![image](assets/img/panel_13.png)  
+IPanelManager中的注册器可自定义，只要实现IPanelRegister接口即可。`SetRegister` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Set panel register.
+/// 设置注册表。
+/// </summary>
+/// <param name="register">Panel register instance<br/>面板注册表实例</param>
+void SetRegister(IPanelRegister register);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 
 #### <span id="6.4.2">6.4.2 自定义加载器
-IPanelManager中的加载器可自定义，只要实现IIPanelLoaderAdapter接口即可。  
-![image](assets/img/panel_14.png)  
+IPanelManager中的加载器可自定义，只要实现IPanelLoaderAdapter接口即可。`SetLoader` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Set asset loader adapter.
+/// 设置加载器。
+/// </summary>
+/// <param name="loader">Panel asset loader adapter<br/>面板资源加载器适配器</param>
+void SetLoader(IPanelLoaderAdapter loader);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 
 #### <span id="6.4.3">6.4.3 设置面板展示时机
-IPanelManger中的SetShowMoment可以设置面板展示时机(立即展示|帧结束展示)  
-![image](assets/img/panel_15.png)  
+IPanelManger中的SetShowMoment可以设置面板展示时机(立即展示|帧结束展示)。`SetShowMoment` 声明在 `IPanelManager` 中：  
+
+```csharp
+/// <summary>
+/// Set show moment.
+/// 设置显示时机。
+/// </summary>
+/// <param name="showAfterFrame">Whether to show at end of frame<br/>是否在帧结束时显示</param>
+void SetShowMoment(bool showAfterFrame);
+```
+
+来源：`RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Manager/IPanelManager.cs`。  
 + 立即展示
   代码执行时，马上进行加载处理。当资源准备完成后立即添加面板到显示节点。  
 + 帧结束展示

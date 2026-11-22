@@ -32,9 +32,46 @@ If you need to customize the loading, you can implement the IAudioLoader interfa
 ### <span id="5.2">5.2 Use
 
 #### <span id="5.2.1">5.2.1 Register audio information (optional)
-Audio information can be registered in the script using the AudioManager function  
-![image](assets/img/audio_6.png)  
-![image](assets/img/audio_7.png)  
+Audio information can be registered in the script using the AudioManager function. `RegisterMusic` and `ClearMusicRegister` are declared on `IAudioManager`:  
+
+```csharp
+/// <summary>
+/// Register music resource info.
+/// 注册音乐资源信息。
+/// </summary>
+/// <param name="key">Audio key.<br/>音频标识。</param>
+/// <param name="bundleName">Bundle name.<br/>Bundle 名称。</param>
+/// <param name="path">Asset path.<br/>资源路径。</param>
+void RegisterMusic(string key, string bundleName, string path);
+
+/// <summary>
+/// Clear the music register table.
+/// 清理音乐注册表。
+/// </summary>
+void ClearMusicRegister();
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Actions/Audio/IAudioManager.cs`.  
+`RegisterSound` and `ClearSoundRegister` are declared on `IAudioManager`:  
+
+```csharp
+/// <summary>
+/// Register sound resource info.
+/// 注册音效资源信息。
+/// </summary>
+/// <param name="key">Audio key.<br/>音频标识。</param>
+/// <param name="bundleName">Bundle name.<br/>Bundle 名称。</param>
+/// <param name="path">Asset path.<br/>资源路径。</param>
+void RegisterSound(string key, string bundleName, string path);
+
+/// <summary>
+/// Clear the sound register table.
+/// 清理音效注册表。
+/// </summary>
+void ClearSoundRegister();
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Actions/Audio/IAudioManager.cs`.  
 
 #### <span id="5.2.2">5.2.2 Play music, play sound effects
 + Functions starting with SwitchMusic in AudioManger provide support for playing music.
@@ -42,10 +79,46 @@ Audio information can be registered in the script using the AudioManager functio
 + The playback of music sound effects supports direct playback without registration.
 
 #### <span id="5.2.3">5.2.3 Audio Settings
-+ AudioManager supports music mute and volume settings.
-![image](assets/img/audio_8.png)  
-+ AudioManager supports audio mute and volume settings.
-![image](assets/img/audio_9.png)  
++ AudioManager supports music mute and volume settings. `PlayingMusicName` and `SetMusicVolume` are declared on `IAudioManager`:  
+
+```csharp
+/// <summary>
+/// Name of the currently playing music.
+/// 当前播放中的音乐名称。
+/// </summary>
+string PlayingMusicName { get; }
+
+/// <summary>
+/// Set music volume.
+/// 设置音乐音量。
+/// </summary>
+/// <param name="volume">Volume in range [0, 1].<br/>音量，范围 [0, 1]。</param>
+/// <param name="refresh">Whether to apply immediately.<br/>是否立即生效。</param>
+void SetMusicVolume(float volume, bool refresh = true);
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Actions/Audio/IAudioManager.cs`.  
++ AudioManager supports audio mute and volume settings. `SetSoundVolume` and `SetSoundMuted` are declared on `IAudioManager`:  
+
+```csharp
+/// <summary>
+/// Set sound effect volume.
+/// 设置音效音量。
+/// </summary>
+/// <param name="volume">Volume in range [0, 1].<br/>音量，范围 [0, 1]。</param>
+/// <param name="refresh">Whether to apply immediately.<br/>是否立即生效。</param>
+void SetSoundVolume(float volume, bool refresh = true);
+
+/// <summary>
+/// Set sound effect mute state.
+/// 设置音效静音。
+/// </summary>
+/// <param name="muted">Muted state.<br/>是否静音。</param>
+/// <param name="refresh">Whether to apply immediately.<br/>是否立即生效。</param>
+void SetSoundMuted(bool muted, bool refresh = true);
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Actions/Audio/IAudioManager.cs`.  
 
 #### <span id="5.2.4">5.2.4 It is recommended to use packaged components, such as:
 AudioDemoMusicNode and AudioDemoSoundNode components in the example.  

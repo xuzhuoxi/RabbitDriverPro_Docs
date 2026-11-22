@@ -19,6 +19,8 @@ disable-model-invocation: true
 | 文档站（只改 `pages/`、`_data/`、根目录 `index.md` / `index_en.md`） | `.` |
 | 框架源码 | `../RabbitDriver-Core` |
 | Unity 工程、插件源码、示例 | `../RabbitDriverPro_UnityDev` |
+| Infra 基础库（事件、服务等接口声明） | `../Infra-CSharp` |
+| Rabbit 客户端库 | `../RabbitClient-CSharp` |
 
 ## 执行流程
 
@@ -88,7 +90,7 @@ disable-model-invocation: true
 - Unity 工程里的 `Assets/Plugins/JLGames/RabbitDriver-Core.dll` 与 `RabbitDriver-CoreEditor.dll` 是上述源码的编译结果。写到其中类型时去 Core 仓库打开 `.cs`，文档里用相对路径链到该文件
 - 插件自身 `.cs` 在 `../RabbitDriverPro_UnityDev/Assets/JLGames/RabbitDriverPro/`，命名空间 `JLGames.RabbitDriverPro`。这里没有 Loader、Panel、Audio 的实现
 - 示例在该目录的 `Samples/<模块>/`
-- `Infra-CSharp.dll`、`RabbitClient.dll` 的源码不在这两个仓库。示例里出现 `JLGames.Infra.*` 或 RabbitClient 类型时，只写示例实际用到的命名空间和类型名，不展开实现，不编造源文件链接
+- `JLGames.Infra.*` 的声明打开 `../Infra-CSharp` 里的 `.cs`。`RabbitClient` 的声明打开 `../RabbitClient-CSharp`。按下一节「接口声明」摘录，不贴方法体
 
 ### 版本与链接
 
@@ -102,6 +104,18 @@ disable-model-invocation: true
 - YAML 只改 `text` 等读者可见字符串时，两边一起改。不要单边增删键
 - 导航 `id` 中英共用（如 `manual.loader`）。不要为了措辞去改 `id`
 - 类型名、菜单路径、文件名、命名空间两边都保持英文原文
+
+## 接口声明
+
+手册某一小节在介绍一组公开函数时，按事件章 `ManualInclude_1_Event_*.md` 的写法补全。中英两页使用同一段代码。
+
+1. 打开声明这些函数的接口文件。函数在基接口上时，写明「`IEventDispatcher` 继承 `IEventListener`」，声明块仍取自真正写出该函数的文件
+2. 只放这一小节对应的重载，不把整个接口贴进来
+3. 签名与源码一致，包含默认参数。源码里的 `/// <summary>` 与 `/// <param>` 原样复制，中英两行都留
+4. 代码块用 `csharp`。块后写来源，路径从该仓库根目录算，例如 `Infra-CSharp/JLGames/Infra/Event/IEventListener.cs`
+5. 属性与这一小节的函数写在同一块里，例如 `IThreadEventDispatcher.IsNullContext`
+6. 保留该小节已有的截图。不编造注释，不从实现类反推接口没有的重载
+7. 类体整段被注释的类型不要写成声明来源
 
 ## 写法
 
@@ -135,7 +149,7 @@ disable-model-invocation: true
 - [ ] `index.md` 与 `index_en.md` 的产品名与 `displayName` 一致
 - [ ] 插件版本来自 `package.json`，没有沿用 Include 或 Guide 里的旧版本
 - [ ] 未改 `_config.yml`、布局、资源、两个源码仓库
-- [ ] 未把 Infra / RabbitClient 写成有源码链接的模块
+- [ ] 接口声明与打开过的 `.cs` 一致，含 XML 注释；中英代码块相同，并写了来源路径
 - [ ] 未把 ThreadEvent、MainThread 写成可用特性
 
 ## 附加资源

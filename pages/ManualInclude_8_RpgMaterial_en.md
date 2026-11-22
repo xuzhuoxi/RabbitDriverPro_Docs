@@ -38,7 +38,7 @@ The player's numerical data is managed in the form of KTV (Key-Type-Value).
   Data Object Base Interface  
 + IElementSet
   Data collection base interface for managing IElement objects.  
-+ IUserData、IUserData、IUserValidData、IUserValidData1
++ IUserData、IUserData1、IUserValidData、IUserValidData1
   User data related interface.  
 + ISerializeDataBinary, ISerializeDataJson and ISerializeDataString
   Data serialization related interface.  

@@ -48,7 +48,7 @@
 
 | 导航 id | Include | Core 源码（先读） | UnityDev 示例与菜单 |
 |---------|---------|-------------------|---------------------|
-| `manual.event` | `ManualInclude_1_Event_*.md` | 事件核心不在 Core。示例使用 `JLGames.Infra.Event`。`Actions/ThreadEvent` 类型体为注释，不要写成多线程实现 | `Samples/Event/` |
+| `manual.event` | `ManualInclude_1_Event_*.md` | 事件声明在 `../Infra-CSharp/Infra-CSharp/JLGames/Infra/Event/`：`IEventListener`（添加/移除监听）、`IEventDispatcher`（分发）、`IThreadEventDispatcher`（同步上下文）。按 SKILL「接口声明」摘录签名和 XML 注释。`Actions/ThreadEvent` 类型体为注释，不要写成多线程实现 | `Samples/Event/` |
 | `manual.loader` | `ManualInclude_2_Loader_*.md` | `RabbitDriver-Core/JLGames/RabbitDriver/Actions/Loaderx/`，入口 `Loader` | `Samples/Loader/`；菜单 `Tools/RabbitDriverPro/Project/Gen LoaderSettings` |
 | `manual.i18n` | `ManualInclude_3_i18n_*.md` | `Actions/i18n/` | `Samples/i18n/`；菜单 `Gen I18NSettings`。`I18NTMPText` 在插件 Runtime，且受 `TMP_PRESENT` 约束 |
 | `manual.net` | `ManualInclude_4_Net_*.md` | `Games/NetManager/` 是连接登记与虚拟网络。联机组件在 `RabbitNetwork/` | `Samples/NetManager/`、`Samples/RabbitNetwork/` |
