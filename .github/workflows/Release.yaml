@@ -171,7 +171,7 @@ jobs:
 
           gh api --method POST "repos/${GITHUB_REPOSITORY}/releases/generate-notes" \
             -f tag_name="${tag}" \
-            -f target_commitish="${TAG_SHA}" \
+            -f target_commitish="${tag}" \
             --jq .body > "${auto_notes}"
 
           if [[ -n "${cn}" && -n "${en}" ]]; then
@@ -193,8 +193,9 @@ jobs:
             prerelease_args=(--prerelease)
           fi
 
+          # 不传 --target。传提交 SHA 时，若该提交相对默认分支改过工作流文件，
+          # GitHub 会要求 workflows:write，GITHUB_TOKEN 无法获得该权限，接口返回 403。
           gh release create "${tag}" "${pdfs[@]}" \
             --title "${tag}" \
-            --target "${TAG_SHA}" \
             --notes-file "${combined}" \
             "${prerelease_args[@]}"
