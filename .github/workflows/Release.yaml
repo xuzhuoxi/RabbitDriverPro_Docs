@@ -3,7 +3,7 @@
 # 2. 等两页都加载完后打印为 PDF。
 # 3. 打印为 A4、每张纸 1 页、边距与缩放用 Chrome 默认值，并保留页眉页脚。
 # 4. 把两个 PDF 放到该 tag 的 GitHub Release Assets 中。
-# 手动运行时必须填写 tag，格式为 v*.*.*。已有同名 Release 时只更新这两份 PDF，否则创建 Release。
+# 手动运行时必须填写 tag，格式为 v*.*.*。远程没有这个 tag 则直接失败。已有同名 Release 时只更新这两份 PDF，否则创建 Release。
 name: Release
 
 on:
@@ -54,10 +54,15 @@ jobs:
             echo "::error::tag ${tag} 不符合 v*.*.*，例如 v2.2.0。2.2.0 与 v2.2 不会通过。"
             exit 1
           fi
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            if ! git ls-remote --tags origin "refs/tags/${tag}" | awk -v ref="refs/tags/${tag}" '$2 == ref { found = 1 } END { exit !found }'; then
+              echo "::error::tag ${tag} 不存在。"
+              exit 1
+            fi
+          fi
           git fetch origin main --tags --force
           if ! git show-ref --verify --quiet "refs/tags/${tag}"; then
-            echo "::error::找不到 tag ${tag}。远程已有 tag："
-            git tag -l 'v*' | sort -V
+            echo "::error::tag ${tag} 不存在。"
             exit 1
           fi
           sha="$(git rev-parse "refs/tags/${tag}^{}")"
