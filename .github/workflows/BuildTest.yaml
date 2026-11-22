@@ -1,11 +1,9 @@
-name: Publish
+name: BuildTest
 
 on:
   push:
     branches:
       - main
-    tags:
-      - 'v*.*.*'
   workflow_dispatch:
 jobs:
   build:
