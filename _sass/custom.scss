@@ -95,9 +95,21 @@ manual-nav {
 .text-uppercase      { text-transform: uppercase; }
 .text-capitalize     { text-transform: capitalize; }
 
-// 围栏代码块字号。本文件在 jekyll-theme-minimal.scss 之后引入，这里只覆盖 font-size。
-// pre 的内边距、背景、圆角、边框、横向滚动仍用主题里的 pre 规则。
-// 站点中只有围栏代码生成 pre；正文和行内 code 不在 pre 内，字号不变。
+// 围栏代码块。本文件在 jekyll-theme-minimal.scss 之后引入。
+// 覆盖字号和换行：长行在代码块宽度内折行，不出现水平滚动条。
+// 内边距、背景、圆角、边框仍用主题里的 pre 规则。
+// 主题在窄屏规则里把 pre、code 设为 word-wrap: normal，这里连同内部 code 一起覆盖。
+// 站点中只有围栏代码生成 pre；正文和行内 code 不在 pre 内，不受影响。
 pre {
-  font-size: 10px;
+  font-size: 12px;
+  overflow-x: visible;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+pre code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
