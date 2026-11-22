@@ -28,16 +28,25 @@ const jobs = [
 
 // Chrome 页眉页脚模板默认字号为 0，必须写明字号才会显示。
 // 内容与打印对话框勾选「页眉和页脚」时一致：日期、标题、网址、页码。
+const cjkFont = '"Noto Sans CJK SC", sans-serif';
 const headerTemplate = `
-<div style="font-size:8px; width:100%; padding:0 8px; box-sizing:border-box; display:flex; justify-content:space-between;">
+<div style="font-size:8px; font-family:${cjkFont}; width:100%; padding:0 8px; box-sizing:border-box; display:flex; justify-content:space-between;">
   <span class="date"></span>
   <span class="title"></span>
 </div>`;
 const footerTemplate = `
-<div style="font-size:8px; width:100%; padding:0 8px; box-sizing:border-box; display:flex; justify-content:space-between;">
+<div style="font-size:8px; font-family:${cjkFont}; width:100%; padding:0 8px; box-sizing:border-box; display:flex; justify-content:space-between;">
   <span class="url"></span>
   <span><span class="pageNumber"></span>/<span class="totalPages"></span></span>
 </div>`;
+const cjkStyle = `
+  body, h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote, div, span, a {
+    font-family: "Noto Sans CJK SC", sans-serif !important;
+  }
+  pre, code, kbd, samp, tt {
+    font-family: "Noto Sans CJK SC", monospace !important;
+  }
+`;
 
 async function waitUntilFullyLoaded(page) {
   await page.evaluate(async () => {
@@ -71,6 +80,8 @@ try {
       throw new Error(`${job.name} 打开失败：${job.url}（HTTP ${status}）`);
     }
     await waitUntilFullyLoaded(page);
+    await page.addStyleTag({ content: cjkStyle });
+    await page.evaluate(() => document.fonts.ready);
     console.log(`已加载：${page.url()}`);
     return { page, job };
   }));
