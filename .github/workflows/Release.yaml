@@ -101,9 +101,18 @@ jobs:
           set -euo pipefail
           print_dir="${RUNNER_TEMP}/print-manuals"
           mkdir -p "${print_dir}"
-          npm init -y --prefix "${print_dir}"
-          npm install --prefix "${print_dir}" puppeteer@24
-          cp .github/scripts/print-manuals.mjs "${print_dir}/print-manuals.mjs"
+          # 工作流文件来自触发时选择的提交。随后会检出 tag，tag 里可能还没有这个脚本。
+          script_rev="${GITHUB_SHA}"
+          if ! git cat-file -e "${script_rev}:.github/scripts/print-manuals.mjs"; then
+            echo "::error::提交 ${script_rev} 中没有 .github/scripts/print-manuals.mjs。请把该文件推到运行工作流的分支。"
+            exit 1
+          fi
+          git show "${script_rev}:.github/scripts/print-manuals.mjs" > "${print_dir}/print-manuals.mjs"
+          (
+            cd "${print_dir}"
+            npm init -y
+            npm install puppeteer@24
+          )
           SITE_ORIGIN="${PAGES_ORIGIN}" \
             PDF_DIR="${GITHUB_WORKSPACE}/downloads" \
             node "${print_dir}/print-manuals.mjs"
