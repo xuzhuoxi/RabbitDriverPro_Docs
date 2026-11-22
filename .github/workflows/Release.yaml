@@ -28,6 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      - name: Record trigger time
+        run: echo "TRIGGERED_AT=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S %z')" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # 需要完整历史，才能判断 tag 提交是否为 main 的祖先
@@ -128,7 +131,8 @@ jobs:
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # 已有同名 Release 时只覆盖两份 PDF。没有则创建，并写入更新日志。
+        # 已有同名 Release 时只覆盖两份 PDF。没有则创建。
+        # 新建时的正文只有触发时间和 GitHub 自动说明，不使用网站更新日志。
         # tag 含 "-" 时，新建的 Release 记为预发布。
         run: |
           set -euo pipefail
@@ -146,51 +150,15 @@ jobs:
           auto_notes="$(mktemp)"
           combined="$(mktemp)"
 
-          extract_section() {
-            local file="$1"
-            local prefix="$2"
-            [[ -f "${file}" ]] || return 0
-            awk -v prefix="${prefix}" '
-              function is_ours(line,    n, c) {
-                if (index(line, prefix) != 1) return 0
-                n = length(prefix)
-                if (length(line) == n) return 1
-                c = substr(line, n + 1, 1)
-                return (c == "(" || c == " ")
-              }
-              {
-                text = $0
-                sub(/\r$/, "", text)
-                is_head = (index(text, "## ") == 1)
-                ours = is_ours(text)
-                if (capture && is_head && !ours) exit
-                if (ours) capture = 1
-                if (capture) print text
-              }
-            ' "${file}"
-          }
-
-          cn="$(extract_section "pages/HomeInclude_CHANGELOG_cn.md" "## 版本 ${tag}")"
-          en="$(extract_section "pages/HomeInclude_CHANGELOG_en.md" "## Version ${tag}")"
-
           gh api --method POST "repos/${GITHUB_REPOSITORY}/releases/generate-notes" \
             -f tag_name="${tag}" \
             -f target_commitish="${tag}" \
             --jq .body > "${auto_notes}"
 
-          if [[ -n "${cn}" && -n "${en}" ]]; then
-            {
-              printf '# 中文\n\n%s\n\n# English\n\n%s\n\n' "${cn}" "${en}"
-              if grep -qF '**Full Changelog**' <<< "${cn}${en}"; then
-                sed '/^\*\*Full Changelog\*\*/d' "${auto_notes}"
-              else
-                cat "${auto_notes}"
-              fi
-            } > "${combined}"
-          else
-            echo "被 tag 的提交里没有完整的 ${tag} 中英版本节，Release 正文只使用自动 notes。"
-            cat "${auto_notes}" > "${combined}"
-          fi
+          {
+            printf '触发时间：%s\n\n' "${TRIGGERED_AT}"
+            cat "${auto_notes}"
+          } > "${combined}"
 
           prerelease_args=()
           if [[ "${tag}" == *-* ]]; then
