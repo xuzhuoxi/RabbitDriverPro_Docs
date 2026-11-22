@@ -314,8 +314,35 @@ The IPanelSettings instance is the interface of the panel configuration informat
 
 ##### 6.4.4.1 Resource Configuration
 IPanelAssetSettings instance  
-Main configuration properties: BundleName, AssetPath, MainScriptName, MainScriptParams  
-![image](assets/img/panel_17.png)  
+Main configuration properties: BundleName, AssetPath, MainScriptName, MainScriptParams. Declared on `IPanelAssetSettings`:  
+
+```csharp
+/// <summary>
+/// AssetBundle name.
+/// AssetBundle 名称。
+/// </summary>
+string BundleName { get; }
+
+/// <summary>
+/// Asset path within the bundle.
+/// 资源路径。
+/// </summary>
+string AssetPath { get; }
+
+/// <summary>
+/// Main script full type name.
+/// 主脚本完整类名。
+/// </summary>
+string MainScriptName { get; }
+
+/// <summary>
+/// JSON or string params injected into the main script.
+/// 主脚本注入的参数字符串。
+/// </summary>
+string MainScriptParams { get; }
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Settings/IPanelAssetSettings.cs`.  
 + BundleName
   The name of the Assetbundle where the panel assets are located
 + AssetPath
@@ -361,8 +388,35 @@ IPanelBackgroundSettings instance
     Screenshot image blur factor  
 
 ##### 6.4.4.3 Animation Configuration
-IPanelAnimSettings instance  
-![image](assets/img/panel_19.png)  
+IPanelAnimSettings instance. `OpenKey`, `OpenState`, `CloseKey`, and `CloseState` are declared on `IPanelAnimSettings`:  
+
+```csharp
+/// <summary>
+/// Open animator mapping key.
+/// 展示时动画控制器映射 Key。
+/// </summary>
+string OpenKey { get; }
+
+/// <summary>
+/// Animation state name for open animator.
+/// 展示时指定的动画 State。
+/// </summary>
+string OpenState { get; }
+
+/// <summary>
+/// Close animator mapping key.
+/// 关闭时动画控制器映射 Key。
+/// </summary>
+string CloseKey { get; }
+
+/// <summary>
+/// Animation state name for close animator.
+/// 关闭时指定的动画 State。
+/// </summary>
+string CloseState { get; }
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Settings/IPanelAnimSettings.cs`.  
 + OpenKey
   The key used when animation information is registered, used to find animations  
 + OpenState
@@ -377,11 +431,54 @@ At this stage, there are 4 interfaces related to panel function expansion:
 IInitPanel, IParamsPanel, IRefreshPanel, IDisposePanel  
 **NOTE**: IShowPanel, IClosePanel are **deprecated**.  
 + IInitPanel
-  Used for panel initialization, the call timing is after OnEnable  
-  ![image](assets/img/panel_9.png)  
-  +IParamsPanel
-  Used for panel injection parameters.  
-  ![image](assets/img/panel_10.png)  
+  Used for panel initialization, the call timing is after OnEnable. Declared as follows:  
+
+```csharp
+/// <summary>
+/// Show panel execution timing: Awake > OnEnable > IShowPanel > IInitPanel > IParamsPanel > IRefreshPanel > Start
+/// 展示面板执行时机：Awake > OnEnable > IShowPanel > IInitPanel > IParamsPanel > IRefreshPanel > Start
+/// </summary>
+public interface IInitPanel
+{
+    /// <summary>
+    /// Initialize panel when shown.
+    /// 面板展示时执行初始化。
+    /// </summary>
+    /// <param name="instance">Panel instance<br/>面板实例</param>
+    void InitPanel(IPanelInstance instance);
+}
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Extend/IInitPanel.cs`.  
++ IParamsPanel
+  Used for panel injection parameters. Declared as follows:  
+
+```csharp
+/// <summary>
+/// Show panel execution timing: Awake > OnEnable > IShowPanel > IInitPanel > IParamsPanel > IRefreshPanel > Start
+/// 展示面板执行时机：Awake > OnEnable > IShowPanel > IInitPanel > IParamsPanel > IRefreshPanel > Start
+/// </summary>
+public interface IParamsPanel
+{
+    /// <summary>
+    /// Set panel parameters from a string.
+    /// 使用字符串设置面板参数。
+    /// </summary>
+    /// <param name="instance">Panel instance<br/>面板实例</param>
+    /// <param name="str">Parameter string (e.g. JSON)<br/>参数字符串（如 JSON）</param>
+    void SetPanelStringParams(IPanelInstance instance, string str);
+
+    /// <summary>
+    /// Set panel parameters from an object.
+    /// 使用对象设置面板参数。
+    /// </summary>
+    /// <param name="instance">Panel instance<br/>面板实例</param>
+    /// <param name="params">Parameter object<br/>参数对象</param>
+    void SetPanelObjectParams(IPanelInstance instance, object @params);
+}
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Extend/IParamsPanel.cs`.  
   
   + SetPanelObjectParams
     Triggered when calling ShowPanel with parameters passed in.  
@@ -391,11 +488,45 @@ IInitPanel, IParamsPanel, IRefreshPanel, IDisposePanel
     2. When registering panel information, MainScriptParams in IPanelAssetSettings configuration is not empty. The incoming parameter is the value of MainScriptParams.
 
 + IRefreshPanel
-  Used when the panel refresh logic is not suitable for use in Start or Awake.  
-  ![image](assets/img/panel_11.png)  
+  Used when the panel refresh logic is not suitable for use in Start or Awake. Declared as follows:  
+
+```csharp
+/// <summary>
+/// Show panel execution timing: Awake > OnEnable > IShowPanel > IInitPanel > IParamsPanel > IRefreshPanel > Start
+/// 展示面板执行时机：Awake > OnEnable > IShowPanel > IInitPanel > IParamsPanel > IRefreshPanel > Start
+/// </summary>
+public interface IRefreshPanel
+{
+    /// <summary>
+    /// Refresh panel display when shown.
+    /// 面板展示时刷新显示。
+    /// </summary>
+    /// <param name="instance">Panel instance<br/>面板实例</param>
+    void RefreshPanel(IPanelInstance instance);
+}
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Extend/IRefreshPanel.cs`.  
 + IDisposePanel
-  Called when the panel is about to be destroyed to perform the release behavior.  
-  ![image](assets/img/panel_12.png)  
+  Called when the panel is about to be destroyed to perform the release behavior. Declared as follows:  
+
+```csharp
+/// <summary>
+/// Remove panel execution timing: IDisposePanel > IClosePanel > OnDisable > OnDestroy 
+/// 移除面板执行时机：IDisposePanel > IClosePanel > OnDisable > OnDestroy
+/// </summary>
+public interface IDisposePanel
+{
+    /// <summary>
+    /// Dispose panel resources when closing.
+    /// 面板关闭时执行释放处理。
+    /// </summary>
+    /// <param name="instance">Panel instance<br/>面板实例</param>
+    void DisposePanel(IPanelInstance instance);
+}
+```
+
+Source: `RabbitDriver-Core/RabbitDriver-Core/JLGames/RabbitDriver/Games/PanelManager/Extend/IDisposePanel.cs`.  
 
 ### <span id="6.5">6.5 Example
 Assets/JLGames/RabbitDriverPro/Samples/Panel  
