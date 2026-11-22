@@ -1,0 +1,203 @@
+# 手动运行，或推送 v*.*.* tag 时：
+# 1. 用本机地址打开 _site 里已有的两份全量手册，不访问 www.xuzhuoxi.com。页面不存在则失败，不重新构建站点。
+# 2. 等两页都加载完后打印为 PDF。
+# 3. 打印为 A4、每张纸 1 页、边距与缩放用 Chrome 默认值，并保留页眉页脚。
+# 4. 把两个 PDF 放到该 tag 的 GitHub Release Assets 中。
+# 手动运行时必须填写 tag，格式为 v*.*.*。已有同名 Release 时只更新这两份 PDF，否则创建 Release。
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'tag，格式 v*.*.*，例如 v2.2.0（须已推送，且该提交在 main 上）'
+        required: true
+        type: string
+  push:
+    tags:
+      - 'v*.*.*' # 例如 v2.2.0、v2.2.0-rc.1；2.2.0 / v2.2 不会触发
+
+# 创建 Release、上传 PDF。GITHUB_TOKEN 由 GitHub 自动注入，无需在 Secrets 中配置。
+# 发布者会显示为 github-actions[bot]，无法改成推 tag 的用户。
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Print manuals and release
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # 需要完整历史，才能判断 tag 提交是否为 main 的祖先
+
+      # 推 tag 时用该 tag。手动运行时用输入的 tag，并检出该提交。
+      - name: Resolve tag
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            tag="${INPUT_TAG}"
+          else
+            tag="${GITHUB_REF_NAME}"
+          fi
+          tag="${tag#"${tag%%[![:space:]]*}"}"
+          tag="${tag%"${tag##*[![:space:]]}"}"
+          tag="${tag#refs/tags/}"
+          if [[ -z "${tag}" ]]; then
+            echo "::error::tag 不能为空。"
+            exit 1
+          fi
+          if [[ "${tag}" != v*.*.* ]]; then
+            echo "::error::tag ${tag} 不符合 v*.*.*，例如 v2.2.0。2.2.0 与 v2.2 不会通过。"
+            exit 1
+          fi
+          git fetch origin main --tags --force
+          if ! git show-ref --verify --quiet "refs/tags/${tag}"; then
+            echo "::error::找不到 tag ${tag}。远程已有 tag："
+            git tag -l 'v*' | sort -V
+            exit 1
+          fi
+          sha="$(git rev-parse "refs/tags/${tag}^{}")"
+          if ! git merge-base --is-ancestor "${sha}" origin/main; then
+            echo "::error::Tag ${tag} is not on the main branch."
+            exit 1
+          fi
+          git checkout --detach "${sha}"
+          echo "TAG_NAME=${tag}" >> "$GITHUB_ENV"
+          echo "TAG_SHA=${sha}" >> "$GITHUB_ENV"
+
+      # 使用已有的 _site，不运行 BuildTest，也不执行 jekyll build。
+      - name: Check manual pages
+        run: |
+          set -euo pipefail
+          missing=0
+          for page in _site/pages/Manual_Full_cn.html _site/pages/Manual_Full_en.html; do
+            if [[ ! -f "${page}" ]]; then
+              echo "::error::缺少 ${page}，Release 不会重新构建站点。"
+              missing=1
+            fi
+          done
+          if [[ "${missing}" -ne 0 ]]; then
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Print manuals to PDF
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --directory _site >/tmp/site-server.log 2>&1 &
+          echo $! > /tmp/site-server.pid
+          cleanup() { kill "$(cat /tmp/site-server.pid)" >/dev/null 2>&1 || true; }
+          trap cleanup EXIT
+
+          ready=0
+          for _ in $(seq 1 30); do
+            if curl -fsS -o /dev/null "http://127.0.0.1:4173/pages/Manual_Full_cn.html" \
+              && curl -fsS -o /dev/null "http://127.0.0.1:4173/pages/Manual_Full_en.html"; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+          if [[ "${ready}" -ne 1 ]]; then
+            echo "::error::本地站点没有在 30 秒内提供两份手册页面。"
+            cat /tmp/site-server.log
+            exit 1
+          fi
+
+          print_dir="${RUNNER_TEMP}/print-manuals"
+          mkdir -p "${print_dir}"
+          npm init -y --prefix "${print_dir}"
+          npm install --prefix "${print_dir}" puppeteer@24
+          cp .github/scripts/print-manuals.mjs "${print_dir}/print-manuals.mjs"
+          # 只打开本机 _site。页面或资源若指向 www.xuzhuoxi.com，由打印脚本改写到这个地址。
+          SITE_ORIGIN=http://127.0.0.1:4173 \
+            PDF_DIR="${GITHUB_WORKSPACE}/downloads" \
+            node "${print_dir}/print-manuals.mjs"
+
+          test -s downloads/RabbitDriverPro-Manual_cn.pdf
+          test -s downloads/RabbitDriverPro-Manual_en.pdf
+          ls -lh downloads/RabbitDriverPro-Manual_cn.pdf downloads/RabbitDriverPro-Manual_en.pdf
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # 已有同名 Release 时只覆盖两份 PDF。没有则创建，并写入更新日志。
+        # tag 含 "-" 时，新建的 Release 记为预发布。
+        run: |
+          set -euo pipefail
+          tag="${TAG_NAME}"
+          pdfs=(
+            downloads/RabbitDriverPro-Manual_cn.pdf
+            downloads/RabbitDriverPro-Manual_en.pdf
+          )
+
+          if gh release view "${tag}" >/dev/null 2>&1; then
+            gh release upload "${tag}" "${pdfs[@]}" --clobber
+            exit 0
+          fi
+
+          auto_notes="$(mktemp)"
+          combined="$(mktemp)"
+
+          extract_section() {
+            local file="$1"
+            local prefix="$2"
+            [[ -f "${file}" ]] || return 0
+            awk -v prefix="${prefix}" '
+              function is_ours(line,    n, c) {
+                if (index(line, prefix) != 1) return 0
+                n = length(prefix)
+                if (length(line) == n) return 1
+                c = substr(line, n + 1, 1)
+                return (c == "(" || c == " ")
+              }
+              {
+                text = $0
+                sub(/\r$/, "", text)
+                is_head = (index(text, "## ") == 1)
+                ours = is_ours(text)
+                if (capture && is_head && !ours) exit
+                if (ours) capture = 1
+                if (capture) print text
+              }
+            ' "${file}"
+          }
+
+          cn="$(extract_section "pages/HomeInclude_CHANGELOG_cn.md" "## 版本 ${tag}")"
+          en="$(extract_section "pages/HomeInclude_CHANGELOG_en.md" "## Version ${tag}")"
+
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/releases/generate-notes" \
+            -f tag_name="${tag}" \
+            -f target_commitish="${TAG_SHA}" \
+            --jq .body > "${auto_notes}"
+
+          if [[ -n "${cn}" && -n "${en}" ]]; then
+            {
+              printf '# 中文\n\n%s\n\n# English\n\n%s\n\n' "${cn}" "${en}"
+              if grep -qF '**Full Changelog**' <<< "${cn}${en}"; then
+                sed '/^\*\*Full Changelog\*\*/d' "${auto_notes}"
+              else
+                cat "${auto_notes}"
+              fi
+            } > "${combined}"
+          else
+            echo "被 tag 的提交里没有完整的 ${tag} 中英版本节，Release 正文只使用自动 notes。"
+            cat "${auto_notes}" > "${combined}"
+          fi
+
+          prerelease_args=()
+          if [[ "${tag}" == *-* ]]; then
+            prerelease_args=(--prerelease)
+          fi
+
+          gh release create "${tag}" "${pdfs[@]}" \
+            --title "${tag}" \
+            --target "${TAG_SHA}" \
+            --notes-file "${combined}" \
+            "${prerelease_args[@]}"
